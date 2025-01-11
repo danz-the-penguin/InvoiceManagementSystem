@@ -4,7 +4,7 @@
 include('header.php');
 include('functions.php');
 
-$getID = $_GET['id'];
+$getID = isset($_GET['id']) ? $_GET['id'] : ''; 
 
 // output any connection error
 if ($mysqli->connect_error) {
@@ -44,12 +44,12 @@ $mysqli->close();
 	<div class="col-xs-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4>Editing User (<?php echo $getID; ?>)</h4>
+				<h4>Editing User (<?php echo htmlspecialchars($getID, ENT_QUOTES, 'UTF-8'); ?>)</h4>
 			</div>
 			<div class="panel-body form-group form-group-sm">
 				<form method="post" id="update_user">
 					<input type="hidden" name="action" value="update_user">
-					<input type="hidden" name="id" value="<?php echo $getID; ?>">
+					<input type="hidden" name="id" value="<?php echo htmlspecialchars($getID, ENT_QUOTES, 'UTF-8'); ?>">
 
 					<div class="row">
 						<div class="col-xs-4">
