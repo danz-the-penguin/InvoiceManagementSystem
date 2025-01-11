@@ -1,3 +1,4 @@
+//Logout from system
 <?php
 
 
