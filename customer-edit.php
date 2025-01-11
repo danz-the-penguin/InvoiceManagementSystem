@@ -77,7 +77,7 @@ $mysqli->close();
                                 <input type="text" class="form-control margin-bottom copy-input required" name="customer_town" id="customer_town" placeholder="Town" value="<?php echo htmlspecialchars($customer_town, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group no-margin-bottom">
-                                <input type="text" class="form-control copy-input required" name="customer_postcode" id="customer_postcode" placeholder="Postcode" value="<?php echo htmlspecialchars($customer_postcode, ENT_QUOTES, 'UTF-8'); ?>">          
+                                <input type="text" class="form-control copy-input required" name="customer_postcode" id="customer_postcode" placeholder="Postcode" value="<?php echo htmlspecialchars($customer_postcode, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                         </div>
                         <div class="col-xs-6">
@@ -122,7 +122,7 @@ $mysqli->close();
                                 <input type="text" class="form-control margin-bottom required" name="customer_address_1_ship" id="customer_address_1_ship" placeholder="Address 1" value="<?php echo htmlspecialchars($customer_address_1_ship, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control margin-bottom required" name="customer_town_ship" id="customer_town_ship" placeholder="Town" value="<?php echo htmlspecialchars($customer_town_ship, ENT_QUOTES, 'UTF-8'); ?>">                     
+                                <input type="text" class="form-control margin-bottom required" name="customer_town_ship" id="customer_town_ship" placeholder="Town" value="<?php echo htmlspecialchars($customer_town_ship, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group no-margin-bottom">
                                 <input type="text" class="form-control required" name="customer_postcode_ship" id="customer_postcode_ship" placeholder="Postcode" value="<?php echo htmlspecialchars($customer_postcode_ship, ENT_QUOTES, 'UTF-8'); ?>">
