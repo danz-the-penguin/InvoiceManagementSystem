@@ -31,14 +31,14 @@ class PHPMailer
      * The PHPMailer Version number.
      * @type string
      */
-    public $Version = '5.2.10';
+    public $version = '5.2.10';
 
     /**
      * Email priority.
      * Options: 1 = High, 3 = Normal, 5 = low.
      * @type integer
      */
-    public $Priority = 3;
+    public $priority = 3;
 
     /**
      * The character set of the message.
@@ -667,7 +667,7 @@ class PHPMailer
             return;
         }
         //Avoid clash with built-in function names
-        if (!in_array($this->Debugoutput, array('error_log', 'html', 'echo')) and is_callable($this->Debugoutput)) {
+        if (!in_array($this->Debugoutput, array('error_log', 'html', 'echo')) && is_callable($this->Debugoutput)) {
             call_user_func($this->Debugoutput, $str, $this->SMTPDebug);
             return;
         }
@@ -819,38 +819,45 @@ class PHPMailer
      */
     protected function addAnAddress($kind, $address, $name = '')
     {
+        // Check for invalid recipient array
         if (!preg_match('/^(to|cc|bcc|Reply-To)$/', $kind)) {
             $this->setError($this->lang('Invalid recipient array') . ': ' . $kind);
             $this->edebug($this->lang('Invalid recipient array') . ': ' . $kind);
             if ($this->exceptions) {
                 throw new phpmailerException('Invalid recipient array: ' . $kind);
             }
-            return false;
+            return false; // Necessary exit
         }
+
+        // Validate address
         $address = trim($address);
-        $name = trim(preg_replace('/[\r\n]+/', '', $name)); //Strip breaks and trim
+        $name = trim(preg_replace('/[\r\n]+/', '', $name)); // Strip breaks and trim
         if (!$this->validateAddress($address)) {
             $this->setError($this->lang('invalid_address') . ': ' . $address);
             $this->edebug($this->lang('invalid_address') . ': ' . $address);
             if ($this->exceptions) {
                 throw new phpmailerException($this->lang('invalid_address') . ': ' . $address);
             }
-            return false;
+            return false; // Necessary exit
         }
-        if ($kind != 'Reply-To') {
+
+        // Process address based on kind
+        if ($kind === 'Reply-To') {
+            if (!array_key_exists(strtolower($address), $this->ReplyTo)) {
+                $this->ReplyTo[strtolower($address)] = array($address, $name);
+                return true; // Address successfully added
+            }
+        } else {
             if (!isset($this->all_recipients[strtolower($address)])) {
                 array_push($this->$kind, array($address, $name));
                 $this->all_recipients[strtolower($address)] = true;
-                return true;
-            }
-        } else {
-            if (!array_key_exists(strtolower($address), $this->ReplyTo)) {
-                $this->ReplyTo[strtolower($address)] = array($address, $name);
-                return true;
+                return true; // Address successfully added
             }
         }
-        return false;
+
+        return false; // Default fallback return
     }
+
 
     /**
      * Set the From and FromName properties.
@@ -874,11 +881,9 @@ class PHPMailer
         }
         $this->From = $address;
         $this->FromName = $name;
-        if ($auto) {
-            if (empty($this->Sender)) {
-                $this->Sender = $address;
-            }
-        }
+        if ($auto && empty($this->Sender)) {
+            $this->Sender = $address;
+        }        
         return true;
     }
 
@@ -910,7 +915,7 @@ class PHPMailer
      */
     public static function validateAddress($address, $patternselect = 'auto')
     {
-        if (!$patternselect or $patternselect == 'auto') {
+        if (!$patternselect || $patternselect == 'auto') {
             //Check this constant first so it works when extension_loaded() is disabled by safe mode
             //Constant was added in PHP 5.2.4
             if (defined('PCRE_VERSION')) {
@@ -920,7 +925,7 @@ class PHPMailer
                 } else {
                     $patternselect = 'pcre';
                 }
-            } elseif (function_exists('extension_loaded') and extension_loaded('pcre')) {
+            } elseif (function_exists('extension_loaded') && extension_loaded('pcre')) {
                 //Fall back to older PCRE
                 $patternselect = 'pcre';
             } else {
@@ -980,9 +985,9 @@ class PHPMailer
             case 'noregex':
                 //No PCRE! Do something _very_ approximate!
                 //Check the address is 3 chars or longer and contains an @ that's not the first or last char
-                return (strlen($address) >= 3
+                return strlen($address) >= 3
                     and strpos($address, '@') >= 1
-                    and strpos($address, '@') != strlen($address) - 1);
+                    and strpos($address, '@') != strlen($address) - 1;
             case 'php':
             default:
                 return (boolean)filter_var($address, FILTER_VALIDATE_EMAIL);
