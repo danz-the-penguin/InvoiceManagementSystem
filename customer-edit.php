@@ -68,31 +68,31 @@ $mysqli->close();
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="text" class="form-control margin-bottom copy-input required" name="customer_name" id="customer_name" placeholder="Enter name" tabindex="1" value="<?php echo htmlspecialchars($customer_name, ENT_QUOTES, 'UTF-8'); ?>">
+                                <input type="text" class="form-control margin-bottom copy-input required" name="customer_name" id="customer_name" placeholder="Enter name" value="<?php echo htmlspecialchars($customer_name, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control margin-bottom copy-input required" name="customer_address_1" id="customer_address_1" placeholder="Address 1" tabindex="3" value="<?php echo htmlspecialchars($customer_address_1, ENT_QUOTES, 'UTF-8'); ?>">    
+                                <input type="text" class="form-control margin-bottom copy-input required" name="customer_address_1" id="customer_address_1" placeholder="Address 1" value="<?php echo htmlspecialchars($customer_address_1, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control margin-bottom copy-input required" name="customer_town" id="customer_town" placeholder="Town" tabindex="5" value="<?php echo htmlspecialchars($customer_town, ENT_QUOTES, 'UTF-8'); ?>">        
+                                <input type="text" class="form-control margin-bottom copy-input required" name="customer_town" id="customer_town" placeholder="Town" value="<?php echo htmlspecialchars($customer_town, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group no-margin-bottom">
-                                <input type="text" class="form-control copy-input required" name="customer_postcode" id="customer_postcode" placeholder="Postcode" tabindex="7" value="<?php echo htmlspecialchars($customer_postcode, ENT_QUOTES, 'UTF-8'); ?>">                    
+                                <input type="text" class="form-control copy-input required" name="customer_postcode" id="customer_postcode" placeholder="Postcode" value="<?php echo htmlspecialchars($customer_postcode, ENT_QUOTES, 'UTF-8'); ?>">          
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="input-group float-right margin-bottom">
                                 <span class="input-group-addon">@</span>
-                                <input type="email" class="form-control copy-input required" name="customer_email" id="customer_email" placeholder="E-mail address" aria-describedby="sizing-addon1" tabindex="2" value="<?php echo htmlspecialchars($customer_email, ENT_QUOTES, 'UTF-8'); ?>">
+                                <input type="email" class="form-control copy-input required" name="customer_email" id="customer_email" placeholder="E-mail address" aria-describedby="sizing-addon1" value="<?php echo htmlspecialchars($customer_email, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control margin-bottom copy-input" name="customer_address_2" id="customer_address_2" placeholder="Address 2" tabindex="4" value="<?php echo htmlspecialchars($customer_address_2, ENT_QUOTES, 'UTF-8'); ?>">
+                                <input type="text" class="form-control margin-bottom copy-input" name="customer_address_2" id="customer_address_2" placeholder="Address 2" value="<?php echo htmlspecialchars($customer_address_2, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control margin-bottom copy-input required" name="customer_county" id="customer_county" placeholder="County" tabindex="6" value="<?php echo htmlspecialchars($customer_county, ENT_QUOTES, 'UTF-8'); ?>">
+                                <input type="text" class="form-control margin-bottom copy-input required" name="customer_county" id="customer_county" placeholder="County" value="<?php echo htmlspecialchars($customer_county, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group no-margin-bottom">
-                                <input type="text" class="form-control required" name="customer_phone" id="invoice_phone" placeholder="Phone number" tabindex="8" value="<?php echo htmlspecialchars($customer_phone, ENT_QUOTES, 'UTF-8'); ?>">
+                                <input type="text" class="form-control required" name="customer_phone" id="invoice_phone" placeholder="Phone number" value="<?php echo htmlspecialchars($customer_phone, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                         </div>
                     </div>
@@ -108,24 +108,24 @@ $mysqli->close();
                     <div class="row">
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="text" class="form-control margin-bottom required" name="customer_name_ship" id="customer_name_ship" placeholder="Enter name" tabindex="9" value="<?php echo htmlspecialchars($customer_name_ship, ENT_QUOTES, 'UTF-8'); ?>">
+                                <input type="text" class="form-control margin-bottom required" name="customer_name_ship" id="customer_name_ship" placeholder="Enter name" value="<?php echo htmlspecialchars($customer_name_ship, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control margin-bottom" name="customer_address_2_ship" id="customer_address_2_ship" placeholder="Address 2" tabindex="11" value="<?php echo htmlspecialchars($customer_address_2_ship, ENT_QUOTES, 'UTF-8'); ?>">    
+                                <input type="text" class="form-control margin-bottom" name="customer_address_2_ship" id="customer_address_2_ship" placeholder="Address 2" value="<?php echo htmlspecialchars($customer_address_2_ship, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group no-margin-bottom">
-                                <input type="text" class="form-control required" name="customer_county_ship" id="customer_county_ship" placeholder="County" tabindex="13" value="<?php echo htmlspecialchars($customer_county_ship, ENT_QUOTES, 'UTF-8'); ?>">
+                                <input type="text" class="form-control required" name="customer_county_ship" id="customer_county_ship" placeholder="County" value="<?php echo htmlspecialchars($customer_county_ship, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input type="text" class="form-control margin-bottom required" name="customer_address_1_ship" id="customer_address_1_ship" placeholder="Address 1" tabindex="10" value="<?php echo htmlspecialchars($customer_address_1_ship, ENT_QUOTES, 'UTF-8'); ?>">
+                                <input type="text" class="form-control margin-bottom required" name="customer_address_1_ship" id="customer_address_1_ship" placeholder="Address 1" value="<?php echo htmlspecialchars($customer_address_1_ship, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control margin-bottom required" name="customer_town_ship" id="customer_town_ship" placeholder="Town" tabindex="12" value="<?php echo htmlspecialchars($customer_town_ship, ENT_QUOTES, 'UTF-8'); ?>">                            
+                                <input type="text" class="form-control margin-bottom required" name="customer_town_ship" id="customer_town_ship" placeholder="Town" value="<?php echo htmlspecialchars($customer_town_ship, ENT_QUOTES, 'UTF-8'); ?>">                     
                             </div>
                             <div class="form-group no-margin-bottom">
-                                <input type="text" class="form-control required" name="customer_postcode_ship" id="customer_postcode_ship" placeholder="Postcode" tabindex="14" value="<?php echo htmlspecialchars($customer_postcode_ship, ENT_QUOTES, 'UTF-8'); ?>">
+                                <input type="text" class="form-control required" name="customer_postcode_ship" id="customer_postcode_ship" placeholder="Postcode" value="<?php echo htmlspecialchars($customer_postcode_ship, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                         </div>
                     </div>
