@@ -707,7 +707,7 @@ class PHPMailer
         if ($isHtml) {
             $this->ContentType = 'text/html';
         } else {
-            $this->ContentType = $ContentType;
+            $this->ContentType = 'text/plain';
         }
     }
 
@@ -1947,7 +1947,7 @@ class PHPMailer
                 break;
             case 'alt':
                 $body .= $mimepre;
-                $body .= $this->getBoundary($this->boundary[1], $altBodyCharSet, $ContentType, $altBodyEncoding);
+                $body .= $this->getBoundary($this->boundary[1], $altBodyCharSet, 'text/plain', $altBodyEncoding);
                 $body .= $this->encodeString($this->AltBody, $altBodyEncoding);
                 $body .= $this->LE . $this->LE;
                 $body .= $this->getBoundary($this->boundary[1], $bodyCharSet, 'text/html', $bodyEncoding);
@@ -1962,7 +1962,7 @@ class PHPMailer
                 break;
             case 'alt_inline':
                 $body .= $mimepre;
-                $body .= $this->getBoundary($this->boundary[1], $altBodyCharSet, $ContentType, $altBodyEncoding);
+                $body .= $this->getBoundary($this->boundary[1], $altBodyCharSet, 'text/plain', $altBodyEncoding);
                 $body .= $this->encodeString($this->AltBody, $altBodyEncoding);
                 $body .= $this->LE . $this->LE;
                 $body .= $this->textLine('--' . $this->boundary[1]);
@@ -1982,7 +1982,7 @@ class PHPMailer
                 $body .= $this->headerLine('Content-Type', 'multipart/alternative;');
                 $body .= $this->textLine("\tboundary=\"" . $this->boundary[2] . '"');
                 $body .= $this->LE;
-                $body .= $this->getBoundary($this->boundary[2], $altBodyCharSet, $ContentType, $altBodyEncoding);
+                $body .= $this->getBoundary($this->boundary[2], $altBodyCharSet, 'text/plain', $altBodyEncoding);
                 $body .= $this->encodeString($this->AltBody, $altBodyEncoding);
                 $body .= $this->LE . $this->LE;
                 $body .= $this->getBoundary($this->boundary[2], $bodyCharSet, 'text/html', $bodyEncoding);
@@ -1998,7 +1998,7 @@ class PHPMailer
                 $body .= $this->headerLine('Content-Type', 'multipart/alternative;');
                 $body .= $this->textLine("\tboundary=\"" . $this->boundary[2] . '"');
                 $body .= $this->LE;
-                $body .= $this->getBoundary($this->boundary[2], $altBodyCharSet, $ContentType, $altBodyEncoding);
+                $body .= $this->getBoundary($this->boundary[2], $altBodyCharSet, 'text/plain', $altBodyEncoding);
                 $body .= $this->encodeString($this->AltBody, $altBodyEncoding);
                 $body .= $this->LE . $this->LE;
                 $body .= $this->textLine('--' . $this->boundary[2]);
@@ -3208,9 +3208,9 @@ class PHPMailer
             'html'  => 'text/html',
             'htm'   => 'text/html',
             'shtml' => 'text/html',
-            'log'   => $ContentType,
-            'text'  => $ContentType,
-            'txt'   => $ContentType,
+            'log'   => 'text/plain',
+            'text'  => 'text/plain',
+            'txt'   => 'text/plain',
             'rtx'   => 'text/richtext',
             'rtf'   => 'text/rtf',
             'vcf'   => 'text/vcard',
