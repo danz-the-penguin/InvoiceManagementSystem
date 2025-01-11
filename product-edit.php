@@ -1,7 +1,7 @@
 <?php
 
 
-include('header.php');
+include_once'header.php';
 include('functions.php');
 
 $getID = isset($_GET['id']) ? $_GET['id'] : '';
