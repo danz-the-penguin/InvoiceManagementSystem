@@ -4,7 +4,7 @@
 include('header.php');
 include('functions.php');
 
-$getID = $_GET['id'];
+$getID = isset($_GET['id']) ? $_GET['id'] : ''; // Always sanitize the ID input
 
 // Connect to the database
 $mysqli = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME);
@@ -64,7 +64,7 @@ $mysqli->close();
 
 ?>
 
-		<h1>Edit Invoice (<?php echo $getID; ?>)</h1>
+		<h1>Edit Invoice (<?php echo htmlspecialchars($getID, ENT_QUOTES, 'UTF-8'); ?>)</h1>
 		<hr>
 
 		<div id="response" class="alert alert-success" style="display:none;">
@@ -74,7 +74,7 @@ $mysqli->close();
 
 		<form method="post" id="update_invoice">
 			<input type="hidden" name="action" value="update_invoice">
-			<input type="hidden" name="update_id" value="<?php echo $getID; ?>">
+			<input type="hidden" name="update_id" value="<?php echo htmlspecialchars($getID, ENT_QUOTES, 'UTF-8'); ?>">
 
 			<div class="row">
 				<div class="col-xs-12">
