@@ -667,7 +667,7 @@ class PHPMailer
             return;
         }
         //Avoid clash with built-in function names
-        if (!in_array($this->Debugoutput, array('error_log', 'html', 'echo')) && is_callable($this->Debugoutput)) {
+        if (!in_array($this->Debugoutput, array('error_log', 'html', 'echo')) and is_callable($this->Debugoutput)) {
             call_user_func($this->Debugoutput, $str, $this->SMTPDebug);
             return;
         }
@@ -910,7 +910,7 @@ class PHPMailer
      */
     public static function validateAddress($address, $patternselect = 'auto')
     {
-        if (!$patternselect || $patternselect == 'auto') {
+        if (!$patternselect or $patternselect == 'auto') {
             //Check this constant first so it works when extension_loaded() is disabled by safe mode
             //Constant was added in PHP 5.2.4
             if (defined('PCRE_VERSION')) {
@@ -920,7 +920,7 @@ class PHPMailer
                 } else {
                     $patternselect = 'pcre';
                 }
-            } elseif (function_exists('extension_loaded') && extension_loaded('pcre')) {
+            } elseif (function_exists('extension_loaded') and extension_loaded('pcre')) {
                 //Fall back to older PCRE
                 $patternselect = 'pcre';
             } else {
@@ -981,8 +981,8 @@ class PHPMailer
                 //No PCRE! Do something _very_ approximate!
                 //Check the address is 3 chars or longer and contains an @ that's not the first or last char
                 return (strlen($address) >= 3
-                    && strpos($address, '@') >= 1
-                    && strpos($address, '@') != strlen($address) - 1);
+                    and strpos($address, '@') >= 1
+                    and strpos($address, '@') != strlen($address) - 1);
             case 'php':
             default:
                 return (boolean)filter_var($address, FILTER_VALIDATE_EMAIL);
@@ -1033,7 +1033,7 @@ class PHPMailer
             $this->error_count = 0; // Reset errors
             $this->setMessageType();
             // Refuse to send an empty message unless we are specifically allowing it
-            if (!$this->AllowEmpty && empty($this->Body)) {
+            if (!$this->AllowEmpty and empty($this->Body)) {
                 throw new phpmailerException($this->lang('empty_message'), self::STOP_CRITICAL);
             }
 
@@ -1061,9 +1061,9 @@ class PHPMailer
 
             // Sign with DKIM if enabled
             if (!empty($this->DKIM_domain)
-                and !empty($this->DKIM_private)
-                and !empty($this->DKIM_selector)
-                and file_exists($this->DKIM_private)) {
+                && !empty($this->DKIM_private)
+                && !empty($this->DKIM_selector)
+                && file_exists($this->DKIM_private)) {
                 $header_dkim = $this->DKIM_Add(
                     $this->MIMEHeader . $this->mailHeader,
                     $this->encodeHeader($this->secureHeader($this->Subject)),
@@ -1201,12 +1201,12 @@ class PHPMailer
         } else {
             $params = sprintf('-f%s', $this->Sender);
         }
-        if ($this->Sender != '' && !ini_get('safe_mode')) {
+        if ($this->Sender != '' and !ini_get('safe_mode')) {
             $old_from = ini_get('sendmail_from');
             ini_set('sendmail_from', $this->Sender);
         }
         $result = false;
-        if ($this->SingleTo and count($toArr) > 1) {
+        if ($this->SingleTo && count($toArr) > 1) {
             foreach ($toArr as $toAddr) {
                 $result = $this->mailPassthru($toAddr, $this->Subject, $body, $header, $params);
                 $this->doCallback($result, array($toAddr), $this->cc, $this->bcc, $this->Subject, $body, $this->From);
@@ -1280,7 +1280,7 @@ class PHPMailer
         }
 
         // Only send the DATA command if we have viable recipients
-        if ((count($this->all_recipients) > count($bad_rcpt)) && !$this->smtp->data($header . $body)) {
+        if ((count($this->all_recipients) > count($bad_rcpt)) and !$this->smtp->data($header . $body)) {
             throw new phpmailerException($this->lang('data_not_accepted'), self::STOP_CRITICAL);
         }
         if ($this->SMTPKeepAlive) {
@@ -1344,7 +1344,7 @@ class PHPMailer
             $prefix = '';
             $secure = $this->SMTPSecure;
             $tls = ($this->SMTPSecure == 'tls');
-            if ('ssl' == $hostinfo[2] || ('' == $hostinfo[2] && 'ssl' == $this->SMTPSecure)) {
+            if ('ssl' == $hostinfo[2] or ('' == $hostinfo[2] and 'ssl' == $this->SMTPSecure)) {
                 $prefix = 'ssl://';
                 $tls = false; // Can't have SSL and TLS at the same time
                 $secure = 'ssl';
@@ -1355,7 +1355,7 @@ class PHPMailer
             }
             //Do we need the OpenSSL extension?
             $sslext = defined('OPENSSL_ALGO_SHA1');
-            if ('tls' === $secure || 'ssl' === $secure) {
+            if ('tls' === $secure or 'ssl' === $secure) {
                 //Check for an OpenSSL constant rather than using extension_loaded, which is sometimes disabled
                 if (!$sslext) {
                     throw new phpmailerException($this->lang('extension_missing').'openssl', self::STOP_CRITICAL);
@@ -1364,7 +1364,7 @@ class PHPMailer
             $host = $hostinfo[3];
             $port = $this->Port;
             $tport = (integer)$hostinfo[4];
-            if ($tport > 0 && $tport < 65536) {
+            if ($tport > 0 and $tport < 65536) {
                 $port = $tport;
             }
             if ($this->smtp->connect($prefix . $host, $port, $this->Timeout, $options)) {
@@ -1380,7 +1380,7 @@ class PHPMailer
                     // * we have openssl extension
                     // * we are not already using SSL
                     // * the server offers STARTTLS
-                    if ($this->SMTPAutoTLS && $sslext && $secure != 'ssl' && $this->smtp->getServerExt('STARTTLS')) {
+                    if ($this->SMTPAutoTLS and $sslext and $secure != 'ssl' and $this->smtp->getServerExt('STARTTLS')) {
                         $tls = true;
                     }
                     if ($tls) {
@@ -1414,7 +1414,7 @@ class PHPMailer
         // If we get here, all connection attempts have failed, so close connection hard
         $this->smtp->close();
         // As we've caught all exceptions, just report whatever the last one was
-        if ($this->exceptions && !is_null($lastexception)) {
+        if ($this->exceptions and !is_null($lastexception)) {
             throw $lastexception;
         }
         return false;
@@ -1573,7 +1573,7 @@ class PHPMailer
             $buf = '';
             $firstword = true;
             foreach ($words as $word) {
-                if ($qp_mode && (strlen($word) > $length)) {
+                if ($qp_mode and (strlen($word) > $length)) {
                     $space_left = $length - strlen($buf) - $crlflen;
                     if (!$firstword) {
                         if ($space_left > 20) {
@@ -1622,7 +1622,7 @@ class PHPMailer
                     }
                     $buf .= $word;
 
-                    if (strlen($buf) > $length && $buf_o != '') {
+                    if (strlen($buf) > $length and $buf_o != '') {
                         $message .= $buf_o . $soft_break;
                         $buf = $word;
                     }
@@ -1749,9 +1749,9 @@ class PHPMailer
 
         // sendmail and mail() extract Bcc from the header before sending
         if ((
-                $this->Mailer == 'sendmail' || $this->Mailer == 'qmail' || $this->Mailer == 'mail'
+                $this->Mailer == 'sendmail' or $this->Mailer == 'qmail' or $this->Mailer == 'mail'
             )
-            && count($this->bcc) > 0
+            and count($this->bcc) > 0
         ) {
             $result .= $this->addrAppend('Bcc', $this->bcc);
         }
@@ -1893,13 +1893,13 @@ class PHPMailer
         $bodyEncoding = $this->Encoding;
         $bodyCharSet = $this->CharSet;
         //Can we do a 7-bit downgrade?
-        if ($bodyEncoding == '8bit' && !$this->has8bitChars($this->Body)) {
+        if ($bodyEncoding == '8bit' and !$this->has8bitChars($this->Body)) {
             $bodyEncoding = '7bit';
             $bodyCharSet = 'us-ascii';
         }
         //If lines are too long, and we're not already using an encoding that will shorten them,
         //change to quoted-printable transfer encoding
-        if ('base64' != $this->Encoding && self::hasLineLongerThanMax($this->Body)) {
+        if ('base64' != $this->Encoding and self::hasLineLongerThanMax($this->Body)) {
             $this->Encoding = 'quoted-printable';
             $bodyEncoding = 'quoted-printable';
         }
@@ -1907,7 +1907,7 @@ class PHPMailer
         $altBodyEncoding = $this->Encoding;
         $altBodyCharSet = $this->CharSet;
         //Can we do a 7-bit downgrade?
-        if ($altBodyEncoding == '8bit' && !$this->has8bitChars($this->AltBody)) {
+        if ($altBodyEncoding == '8bit' and !$this->has8bitChars($this->AltBody)) {
             $altBodyEncoding = '7bit';
             $altBodyCharSet = 'us-ascii';
         }
@@ -2884,7 +2884,7 @@ class PHPMailer
     protected function setError($msg)
     {
         $this->error_count++;
-        if ($this->Mailer == 'smtp' && !is_null($this->smtp)) {
+        if ($this->Mailer == 'smtp' and !is_null($this->smtp)) {
             $lasterror = $this->smtp->getError();
             if (!empty($lasterror['error'])) {
                 $msg .= $this->lang('smtp_error') . $lasterror['error'];
@@ -2927,7 +2927,7 @@ class PHPMailer
         $result = 'localhost.localdomain';
         if (!empty($this->Hostname)) {
             $result = $this->Hostname;
-        } elseif (isset($_SERVER) && array_key_exists('SERVER_NAME', $_SERVER) && !empty($_SERVER['SERVER_NAME'])) {
+        } elseif (isset($_SERVER) and array_key_exists('SERVER_NAME', $_SERVER) and !empty($_SERVER['SERVER_NAME'])) {
             $result = $_SERVER['SERVER_NAME'];
         } elseif (function_exists('gethostname') && gethostname() !== false) {
             $result = gethostname();
