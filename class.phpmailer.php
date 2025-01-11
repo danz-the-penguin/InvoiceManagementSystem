@@ -883,7 +883,7 @@ class PHPMailer
         $this->FromName = $name;
         if ($auto && empty($this->Sender)) {
             $this->Sender = $address;
-        }        
+        }
         return true;
     }
 
@@ -934,20 +934,23 @@ class PHPMailer
 
     private static function getPatternSelect($patternselect)
     {
-        if ($patternselect && $patternselect != 'auto') {
-            return $patternselect;
+        // Default value to 'auto' if $patternselect is not provided
+        $pattern = $patternselect && $patternselect != 'auto' ? $patternselect : null;
+
+        // Determine the patternselect value based on various conditions
+        if (!$pattern) {
+            if (defined('PCRE_VERSION')) {
+                $pattern = version_compare(PCRE_VERSION, '8.0.3') >= 0 ? 'pcre8' : 'pcre';
+            } elseif (function_exists('extension_loaded') && extension_loaded('pcre')) {
+                $pattern = 'pcre';
+            } else {
+                $pattern = version_compare(PHP_VERSION, '5.2.0') >= 0 ? 'php' : 'noregex';
+            }
         }
 
-        if (defined('PCRE_VERSION')) {
-            return version_compare(PCRE_VERSION, '8.0.3') >= 0 ? 'pcre8' : 'pcre';
-        }
-
-        if (function_exists('extension_loaded') && extension_loaded('pcre')) {
-            return 'pcre';
-        }
-
-        return version_compare(PHP_VERSION, '5.2.0') >= 0 ? 'php' : 'noregex';
+        return $pattern;
     }
+
 
     private static function validateWithPcre8($address)
     {
@@ -995,7 +998,7 @@ class PHPMailer
     {
         return strlen($address) >= 3
             and strpos($address, '@') >= 1
-            and strpos($address, '@') != strlen($address) - 1;
+            && strpos($address, '@') != strlen($address) - 1;
     }
 
     private static function validateWithPhp($address)
