@@ -4,7 +4,7 @@
 include('header.php');
 include('functions.php');
 
-$getID = $_GET['id'];
+$getID = isset($_GET['id']) ? $_GET['id'] : '';
 
 // Connect to the database
 $mysqli = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME);
@@ -45,12 +45,12 @@ $mysqli->close();
 	<div class="col-xs-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4>Editing Product (<?php echo $getID; ?>)</h4>
+				<h4>Editing Product (<?php echo htmlspecialchars($getID, ENT_QUOTES, 'UTF-8'); ?>)</h4>
 			</div>
 			<div class="panel-body form-group form-group-sm">
 				<form method="post" id="update_product">
 					<input type="hidden" name="action" value="update_product">
-					<input type="hidden" name="id" value="<?php echo $getID; ?>">
+					<input type="hidden" name="id" value="<?php echo htmlspecialchars($getID, ENT_QUOTES, 'UTF-8'); ?>">
 					<div class="row">
 						<div class="col-xs-4">
 							<input type="text" class="form-control required" name="product_name" placeholder="Enter product name" value="<?php echo $product_name; ?>">

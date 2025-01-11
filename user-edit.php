@@ -4,7 +4,7 @@
 include('header.php');
 include('functions.php');
 
-$getID = isset($_GET['id']) ? $_GET['id'] : ''; 
+$getID = isset($_GET['id']) ? $_GET['id'] : '';
 
 // output any connection error
 if ($mysqli->connect_error) {
