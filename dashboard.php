@@ -1,9 +1,9 @@
 <?php
-/*******************************************************************************
-* Invoice Management System
-*
+/******************************************************************************* 
+* Invoice Management System 
+* 
 * Version: 1.0
-* Developer: Abhishek Raj
+* Developer: Abhishek Raj 
 *******************************************************************************/
 
 include('header.php');
@@ -150,4 +150,4 @@ function getPaidBills($mysqli) {
     </div>
 </section>
 
-<?php include_once'footer.php'; ?>
+<?php include_once('footer.php'); ?>
