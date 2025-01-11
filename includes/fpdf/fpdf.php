@@ -277,7 +277,10 @@ function AliasNbPages($alias='{nb}')
 function Error($msg)
 {
 	// Fatal error
-	die('<b>FPDF error:</b> '.$msg);
+	die(
+        '<b>FPDF error:</b> ' . 
+        htmlspecialchars($msg, ENT_QUOTES, 'UTF-8')
+    );
 }
 
 function Open()
