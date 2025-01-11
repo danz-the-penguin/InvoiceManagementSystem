@@ -277,7 +277,10 @@ function AliasNbPages($alias='{nb}')
 function Error($msg)
 {
 	// Fatal error
-	die('<b>FPDF error:</b> '.$msg);
+	die(
+        '<b>FPDF error:</b> ' .
+        htmlspecialchars($msg, ENT_QUOTES, 'UTF-8')
+    );
 }
 
 function Open()
@@ -1022,13 +1025,25 @@ function Output($name='', $dest='')
 			echo $this->buffer;
 			break;
 		case 'F':
-			// Save to local file
-			$f = fopen($name,'wb');
-			if(!$f)
-				$this->Error('Unable to create output file: '.$name);
-			fwrite($f,$this->buffer,strlen($this->buffer));
+			// Sanitize the file name to prevent directory traversal or unsafe paths
+			$safe_name = basename($name);  // Remove any directory structure
+		
+			// Validate that the file name contains only allowed characters (e.g., letters, numbers, dashes, and underscores)
+			if (!preg_match('/^[a-zA-Z0-9._-]+$/', $safe_name)) {
+				$this->Error('Invalid file name. Only alphanumeric characters, dashes, underscores, and dots are allowed.');
+			}
+		
+			// Open the file for writing
+			$f = fopen($safe_name, 'wb');
+			if (!$f) {
+				$this->Error('Unable to create output file: ' . $safe_name);
+			}
+		
+			// Write the buffer to the file
+			fwrite($f, $this->buffer, strlen($this->buffer));
 			fclose($f);
 			break;
+			
 		case 'S':
 			// Return as a string
 			return $this->buffer;
