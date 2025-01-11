@@ -129,7 +129,7 @@ $mysqli->close();
 				    </div>
 					<div class="input-group col-xs-4 float-right">
 						<span class="input-group-addon">#<?php echo INVOICE_PREFIX ?></span>
-						<input type="text" name="invoice_id" id="invoice_id" class="form-control required" placeholder="Invoice Number" aria-describedby="sizing-addon1" value="<?php echo $getID; ?>">
+						<input type="text" name="invoice_id" id="invoice_id" class="form-control required" placeholder="Invoice Number" aria-describedby="sizing-addon1" value="<?php echo htmlspecialchars($getID, ENT_QUOTES, 'UTF-8'); ?>">
 					</div>
 				</div>
 			</div>
