@@ -1,7 +1,7 @@
 <?php
 
-include('header.php');
-include('functions.php');
+include_once'header.php';
+include_once'functions.php';
 
 $getID = isset($_GET['id']) ? $_GET['id'] : ''; // Always sanitize the ID input
 
@@ -141,5 +141,5 @@ $mysqli->close();
 </form>
 
 <?php
-include('footer.php');
+include_once'footer.php';
 ?>

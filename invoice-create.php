@@ -77,31 +77,31 @@ include('functions.php');
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="form-group">
-										<input type="text" class="form-control margin-bottom copy-input required" name="customer_name" id="customer_name" placeholder="Enter Name" tabindex="1">
+										<input type="text" class="form-control margin-bottom copy-input required" name="customer_name" id="customer_name" placeholder="Enter Name">
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control margin-bottom copy-input required" name="customer_address_1" id="customer_address_1" placeholder="Address 1" tabindex="3">	
+										<input type="text" class="form-control margin-bottom copy-input required" name="customer_address_1" id="customer_address_1" placeholder="Address 1">	
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control margin-bottom copy-input required" name="customer_town" id="customer_town" placeholder="Town" tabindex="5">		
+										<input type="text" class="form-control margin-bottom copy-input required" name="customer_town" id="customer_town" placeholder="Town">		
 									</div>
 									<div class="form-group no-margin-bottom">
-										<input type="text" class="form-control copy-input required" name="customer_postcode" id="customer_postcode" placeholder="Postcode" tabindex="7">					
+										<input type="text" class="form-control copy-input required" name="customer_postcode" id="customer_postcode" placeholder="Postcode">					
 									</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="input-group float-right margin-bottom">
 										<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-										<input type="email" class="form-control copy-input required" name="customer_email" id="customer_email" placeholder="E-mail Address" aria-describedby="sizing-addon1" tabindex="2">
+										<input type="email" class="form-control copy-input required" name="customer_email" id="customer_email" placeholder="E-mail Address" aria-describedby="sizing-addon1">
 									</div>
 								    <div class="form-group">
-								    	<input type="text" class="form-control margin-bottom copy-input" name="customer_address_2" id="customer_address_2" placeholder="Address 2" tabindex="4">
+								    	<input type="text" class="form-control margin-bottom copy-input" name="customer_address_2" id="customer_address_2" placeholder="Address 2">
 								    </div>
 								    <div class="form-group">
-								    	<input type="text" class="form-control margin-bottom copy-input required" name="customer_county" id="customer_county" placeholder="Country" tabindex="6">
+								    	<input type="text" class="form-control margin-bottom copy-input required" name="customer_county" id="customer_county" placeholder="Country">
 								    </div>
 								    <div class="form-group no-margin-bottom">
-								    	<input type="text" class="form-control required" name="customer_phone" id="customer_phone" placeholder="Phone Number" tabindex="8">
+								    	<input type="text" class="form-control required" name="customer_phone" id="customer_phone" placeholder="Phone Number">
 									</div>
 								</div>
 							</div>
@@ -117,24 +117,24 @@ include('functions.php');
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="form-group">
-										<input type="text" class="form-control margin-bottom required" name="customer_name_ship" id="customer_name_ship" placeholder="Enter Name" tabindex="9">
+										<input type="text" class="form-control margin-bottom required" name="customer_name_ship" id="customer_name_ship" placeholder="Enter Name">
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control margin-bottom" name="customer_address_2_ship" id="customer_address_2_ship" placeholder="Address 2" tabindex="11">	
+										<input type="text" class="form-control margin-bottom" name="customer_address_2_ship" id="customer_address_2_ship" placeholder="Address 2">	
 									</div>
 									<div class="form-group no-margin-bottom">
-										<input type="text" class="form-control required" name="customer_county_ship" id="customer_county_ship" placeholder="Country" tabindex="13">
+										<input type="text" class="form-control required" name="customer_county_ship" id="customer_county_ship" placeholder="Country">
 									</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="form-group">
-								    	<input type="text" class="form-control margin-bottom required" name="customer_address_1_ship" id="customer_address_1_ship" placeholder="Address 1" tabindex="10">
+								    	<input type="text" class="form-control margin-bottom required" name="customer_address_1_ship" id="customer_address_1_ship" placeholder="Address 1">
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control margin-bottom required" name="customer_town_ship" id="customer_town_ship" placeholder="Town" tabindex="12">							
+										<input type="text" class="form-control margin-bottom required" name="customer_town_ship" id="customer_town_ship" placeholder="Town">							
 								    </div>
 								    <div class="form-group no-margin-bottom">
-								    	<input type="text" class="form-control required" name="customer_postcode_ship" id="customer_postcode_ship" placeholder="Postcode" tabindex="14">
+								    	<input type="text" class="form-control required" name="customer_postcode_ship" id="customer_postcode_ship" placeholder="Postcode">
 									</div>
 								</div>
 							</div>

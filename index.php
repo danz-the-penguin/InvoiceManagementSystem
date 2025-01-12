@@ -13,9 +13,11 @@ include('functions.php');
 	<div class="col-md-4 col-md-offset-4">
 		<div class="panel panel-default login-panel">
 		  	<div class="panel-heading panel-login">
-		  		<h1 class="text-center">
-					<img src="<?php echo COMPANY_LOGO ?>" class="img-responsive">
+				<h1 class="text-center">
+					<span class="sr-only">Company Name</span>
+					<img src="<?php echo COMPANY_LOGO ?>" class="img-responsive" alt="Company Logo">
 				</h1>
+
 		    	
 		 	</div>
 		  	<div class="panel-body">
