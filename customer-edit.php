@@ -101,7 +101,7 @@ $mysqli->close();
                             }
                             ?>
                         </div>
-                        <div class="col-xs-6">
+                        <!-- <div class="col-xs-6">
                             <div class="input-group float-right margin-bottom">
                                 <span class="input-group-addon">@</span>
                                 <input type="email" class="form-control copy-input required" name="customer_email" id="customer_email" placeholder="E-mail address" aria-describedby="sizing-addon1" value="<?php echo htmlspecialchars($customer_email, ENT_QUOTES, 'UTF-8'); ?>">
@@ -115,7 +115,7 @@ $mysqli->close();
                             <div class="form-group no-margin-bottom">
                                 <input type="text" class="form-control required" name="customer_phone" id="invoice_phone" placeholder="Phone number" value="<?php echo htmlspecialchars($customer_phone, ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
