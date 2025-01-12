@@ -146,7 +146,7 @@ include('functions.php');
 			<table class="table table-bordered table-hover table-striped" id="invoice_table">
 				<thead>
 					<tr>
-						<th width="500">
+						<th>
 							<h4><a href="#" class="btn btn-success btn-xs add-row"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a> Product</h4>
 						</th>
 						<th>
@@ -155,7 +155,7 @@ include('functions.php');
 						<th>
 							<h4>Price</h4>
 						</th>
-						<th width="300">
+						<th>
 							<h4>Discount</h4>
 						</th>
 						<th>
