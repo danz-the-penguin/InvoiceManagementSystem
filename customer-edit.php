@@ -18,28 +18,12 @@ $query = "SELECT * FROM store_customers WHERE id = '" . $mysqli->real_escape_str
 
 $result = mysqli_query($mysqli, $query);
 
-// // mysqli select query
-// if($result) {
-//     while ($row = mysqli_fetch_assoc($result)) {
-
-//         $customer_name = $row['name']; // customer name
-//         $customer_email = $row['email']; // customer email
-//         $customer_address_1 = $row['address_1']; // customer address
-//         $customer_address_2 = $row['address_2']; // customer address
-//         $customer_town = $row['town']; // customer town
-//         $customer_county = $row['county']; // customer county
-//         $customer_postcode = $row['postcode']; // customer postcode
-//         $customer_phone = $row['phone']; // customer phone number
-
-//         //shipping
-//         $customer_name_ship = $row['name_ship']; // customer name (shipping)
-//         $customer_address_1_ship = $row['address_1_ship']; // customer address (shipping)
-//         $customer_address_2_ship = $row['address_2_ship']; // customer address (shipping)
-//         $customer_town_ship = $row['town_ship']; // customer town (shipping)
-//         $customer_county_ship = $row['county_ship']; // customer county (shipping)
-//         $customer_postcode_ship = $row['postcode_ship']; // customer postcode (shipping)
-//     }
-// }
+// Check if there is a result and store it in $customerData
+if ($result && mysqli_num_rows($result) > 0) {
+    $customerData = mysqli_fetch_assoc($result);
+} else {
+    $customerData = []; // Initialize empty array in case no result
+}
 
 // Function to handle form population
 function populateField($row, $field) {
@@ -73,40 +57,38 @@ $mysqli->close();
                 <div class="panel-body form-group form-group-sm">
                     <div class="row">
                         <div class="col-xs-6">
-                            <<?php
-                            // Fields for customer information
-                            $customerFields = [
+                            <?php
+                            // Fields for customer information (first column)
+                            $customerFields1 = [
                                 'customer_name' => 'name',
                                 'customer_email' => 'email',
                                 'customer_address_1' => 'address_1',
                                 'customer_address_2' => 'address_2',
+                            ];
+
+                            foreach ($customerFields1 as $field => $dbColumn) {
+                                echo "<div class='form-group'>
+                                        <input type='text' class='form-control margin-bottom copy-input required' name='$field' id='$field' placeholder='" . ucfirst(str_replace('_', ' ', $field)) . "' value='" . populateField($customerData, $dbColumn) . "'>
+                                    </div>";
+                            }
+                            ?>
+                        </div>
+                        <div class="col-xs-6">
+                            <?php
+                            // Fields for customer information (second column)
+                            $customerFields2 = [
                                 'customer_town' => 'town',
                                 'customer_county' => 'county',
                                 'customer_postcode' => 'postcode',
                                 'customer_phone' => 'phone'
                             ];
 
-                            foreach ($customerFields as $field => $dbColumn) {
+                            foreach ($customerFields2 as $field => $dbColumn) {
                                 echo "<div class='form-group'>
                                         <input type='text' class='form-control margin-bottom copy-input required' name='$field' id='$field' placeholder='" . ucfirst(str_replace('_', ' ', $field)) . "' value='" . populateField($customerData, $dbColumn) . "'>
-                                      </div>";
+                                    </div>";
                             }
                             ?>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="input-group float-right margin-bottom">
-                                <span class="input-group-addon">@</span>
-                                <input type="email" class="form-control copy-input required" name="customer_email" id="customer_email" placeholder="E-mail address" aria-describedby="sizing-addon1" value="<?php echo htmlspecialchars($customer_email, ENT_QUOTES, 'UTF-8'); ?>">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control margin-bottom copy-input" name="customer_address_2" id="customer_address_2" placeholder="Address 2" value="<?php echo htmlspecialchars($customer_address_2, ENT_QUOTES, 'UTF-8'); ?>">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control margin-bottom copy-input required" name="customer_county" id="customer_county" placeholder="County" value="<?php echo htmlspecialchars($customer_county, ENT_QUOTES, 'UTF-8'); ?>">
-                            </div>
-                            <div class="form-group no-margin-bottom">
-                                <input type="text" class="form-control required" name="customer_phone" id="invoice_phone" placeholder="Phone number" value="<?php echo htmlspecialchars($customer_phone, ENT_QUOTES, 'UTF-8'); ?>">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,23 +101,38 @@ $mysqli->close();
                 </div>
                 <div class="panel-body form-group form-group-sm">
                     <div class="row">
-                    <?php
-                            // Fields for shipping information
-                            $shippingFields = [
+                        <div class="col-xs-6">
+                            <?php
+                            // Fields for shipping information (first column)
+                            $shippingFields1 = [
                                 'customer_name_ship' => 'name_ship',
                                 'customer_address_1_ship' => 'address_1_ship',
-                                'customer_address_2_ship' => 'address_2_ship',
+                                'customer_address_2_ship' => 'address_2_ship'
+                            ];
+
+                            foreach ($shippingFields1 as $field => $dbColumn) {
+                                echo "<div class='form-group'>
+                                        <input type='text' class='form-control margin-bottom required' name='$field' id='$field' placeholder='" . ucfirst(str_replace('_', ' ', $field)) . "' value='" . populateField($customerData, $dbColumn) . "'>
+                                    </div>";
+                            }
+                            ?>
+                        </div>
+                        <div class="col-xs-6">
+                            <?php
+                            // Fields for shipping information (second column)
+                            $shippingFields2 = [
                                 'customer_town_ship' => 'town_ship',
                                 'customer_county_ship' => 'county_ship',
                                 'customer_postcode_ship' => 'postcode_ship'
                             ];
 
-                            foreach ($shippingFields as $field => $dbColumn) {
+                            foreach ($shippingFields2 as $field => $dbColumn) {
                                 echo "<div class='form-group'>
                                         <input type='text' class='form-control margin-bottom required' name='$field' id='$field' placeholder='" . ucfirst(str_replace('_', ' ', $field)) . "' value='" . populateField($customerData, $dbColumn) . "'>
-                                      </div>";
+                                    </div>";
                             }
                             ?>
+                        </div>
                     </div>
                 </div>
             </div>
