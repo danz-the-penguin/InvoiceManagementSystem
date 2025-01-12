@@ -18,6 +18,14 @@ $query = "SELECT * FROM store_customers WHERE id = '" . $mysqli->real_escape_str
 
 $result = mysqli_query($mysqli, $query);
 
+// Check if there is a result and store it in $customerData
+if ($result && mysqli_num_rows($result) > 0) {
+    $customerData = mysqli_fetch_assoc($result);
+} else {
+    $customerData = []; // Initialize empty array in case no result
+}
+
+
 // // mysqli select query
 // if($result) {
 //     while ($row = mysqli_fetch_assoc($result)) {
