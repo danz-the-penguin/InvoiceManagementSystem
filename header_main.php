@@ -1,6 +1,6 @@
 <?php
 	//check login
-	include"session.php";
+	include_once"session.php";
 ?>
 
 <!doctype html>

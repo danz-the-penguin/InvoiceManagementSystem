@@ -172,7 +172,7 @@ public function __construct($orientation='P', $unit='mm', $size='A4')
 	$this->PDFVersion = '1.3';
 }
 
-function SetMargins($left, $top, $right=null)
+public function SetMargins($left, $top, $right=null)
 {
 	// Set left, top and right margins
 	$this->lMargin = $left;
@@ -182,7 +182,7 @@ function SetMargins($left, $top, $right=null)
 	$this->rMargin = $right;
 }
 
-function SetLeftMargin($margin)
+public function SetLeftMargin($margin)
 {
 	// Set left margin
 	$this->lMargin = $margin;
@@ -190,19 +190,19 @@ function SetLeftMargin($margin)
 		{$this->x = $margin;}
 }
 
-function SetTopMargin($margin)
+public function SetTopMargin($margin)
 {
 	// Set top margin
 	$this->tMargin = $margin;
 }
 
-function SetRightMargin($margin)
+public function SetRightMargin($margin)
 {
 	// Set right margin
 	$this->rMargin = $margin;
 }
 
-function SetAutoPageBreak($auto, $margin=0)
+public function SetAutoPageBreak($auto, $margin=0)
 {
 	// Set auto page break mode and triggering margin
 	$this->AutoPageBreak = $auto;
@@ -210,7 +210,7 @@ function SetAutoPageBreak($auto, $margin=0)
 	$this->PageBreakTrigger = $this->h-$margin;
 }
 
-function SetDisplayMode($zoom, $layout='default')
+public function SetDisplayMode($zoom, $layout='default')
 {
 	// Set display mode in viewer
 	if($zoom=='fullpage' || $zoom=='fullwidth' || $zoom=='real' || $zoom=='default' || !is_string($zoom))
@@ -223,7 +223,7 @@ function SetDisplayMode($zoom, $layout='default')
 		{$this->Error('Incorrect layout display mode: '.$layout);}
 }
 
-function SetCompression($compress)
+public function SetCompression($compress)
 {
 	// Set page compression
 	if(function_exists('gzcompress'))
@@ -232,7 +232,7 @@ function SetCompression($compress)
 		{$this->compress = false;}
 }
 
-function SetTitle($title, $isUTF8=false)
+public function SetTitle($title, $isUTF8=false)
 {
 	// Title of document
 	if($isUTF8)
@@ -240,7 +240,7 @@ function SetTitle($title, $isUTF8=false)
 	$this->title = $title;
 }
 
-function SetSubject($subject, $isUTF8=false)
+public function SetSubject($subject, $isUTF8=false)
 {
 	// Subject of document
 	if($isUTF8)
@@ -248,7 +248,7 @@ function SetSubject($subject, $isUTF8=false)
 	$this->subject = $subject;
 }
 
-function SetAuthor($author, $isUTF8=false)
+public function SetAuthor($author, $isUTF8=false)
 {
 	// Author of document
 	if($isUTF8)
@@ -256,7 +256,7 @@ function SetAuthor($author, $isUTF8=false)
 	$this->author = $author;
 }
 
-function SetKeywords($keywords, $isUTF8=false)
+public function SetKeywords($keywords, $isUTF8=false)
 {
 	// Keywords of document
 	if($isUTF8)
@@ -264,7 +264,7 @@ function SetKeywords($keywords, $isUTF8=false)
 	$this->keywords = $keywords;
 }
 
-function SetCreator($creator, $isUTF8=false)
+public function SetCreator($creator, $isUTF8=false)
 {
 	// Creator of document
 	if($isUTF8)
@@ -272,13 +272,13 @@ function SetCreator($creator, $isUTF8=false)
 	$this->creator = $creator;
 }
 
-function AliasNbPages($alias='{nb}')
+public function AliasNbPages($alias='{nb}')
 {
 	// Define an alias for total number of pages
 	$this->AliasNbPages = $alias;
 }
 
-function Error($msg)
+public function Error($msg)
 {
 	// Fatal error
 	die(
@@ -287,13 +287,13 @@ function Error($msg)
     );
 }
 
-function Open()
+public function Open()
 {
 	// Begin document
 	$this->state = 1;
 }
 
-function Close()
+public function Close()
 {
 	// Terminate document
 	if($this->state==3)
@@ -310,7 +310,7 @@ function Close()
 	$this->_enddoc();
 }
 
-function AddPage($orientation='', $size='')
+public function AddPage($orientation='', $size='')
 {
 	// Start a new page
 	if($this->state==0)
@@ -379,23 +379,23 @@ function AddPage($orientation='', $size='')
 	$this->ColorFlag = $cf;
 }
 
-function Header()
+public function Header()
 {
 	// To be implemented in your own inherited class
 }
 
-function Footer()
+public function Footer()
 {
 	// To be implemented in your own inherited class
 }
 
-function PageNo()
+public function PageNo()
 {
 	// Get current page number
 	return $this->page;
 }
 
-function SetDrawColor($r, $g=null, $b=null)
+public function SetDrawColor($r, $g=null, $b=null)
 {
 	// Set color for all stroking operations
 	if(($r==0 && $g==0 && $b==0) || $g===null)
@@ -406,7 +406,7 @@ function SetDrawColor($r, $g=null, $b=null)
 		{$this->_out($this->DrawColor);}
 }
 
-function SetFillColor($r, $g=null, $b=null)
+public function SetFillColor($r, $g=null, $b=null)
 {
 	// Set color for all filling operations
 	if(($r==0 && $g==0 && $b==0) || $g===null)
@@ -418,7 +418,7 @@ function SetFillColor($r, $g=null, $b=null)
 		{$this->_out($this->FillColor);}
 }
 
-function SetTextColor($r, $g=null, $b=null)
+public function SetTextColor($r, $g=null, $b=null)
 {
 	// Set color for text
 	if(($r==0 && $g==0 && $b==0) || $g===null)
@@ -428,7 +428,7 @@ function SetTextColor($r, $g=null, $b=null)
 	$this->ColorFlag = ($this->FillColor!=$this->TextColor);
 }
 
-function GetStringWidth($s)
+public function GetStringWidth($s)
 {
 	// Get width of a string in the current font
 	$s = (string)$s;
@@ -440,7 +440,7 @@ function GetStringWidth($s)
 	return $w*$this->FontSize/1000;
 }
 
-function SetLineWidth($width)
+public function SetLineWidth($width)
 {
 	// Set line width
 	$this->LineWidth = $width;
@@ -448,13 +448,13 @@ function SetLineWidth($width)
 		{$this->_out(sprintf('%.2F w',$width*$this->k));}
 }
 
-function Line($x1, $y1, $x2, $y2)
+public function Line($x1, $y1, $x2, $y2)
 {
 	// Draw a line
 	$this->_out(sprintf('%.2F %.2F m %.2F %.2F l S',$x1*$this->k,($this->h-$y1)*$this->k,$x2*$this->k,($this->h-$y2)*$this->k));
 }
 
-function Rect($x, $y, $w, $h, $style='')
+public function Rect($x, $y, $w, $h, $style='')
 {
 	// Draw a rectangle
 	if($style=='F')
@@ -466,7 +466,7 @@ function Rect($x, $y, $w, $h, $style='')
 	$this->_out(sprintf('%.2F %.2F %.2F %.2F re %s',$x*$this->k,($this->h-$y)*$this->k,$w*$this->k,-$h*$this->k,$op));
 }
 
-function AddFont($family, $style='', $file='')
+public function AddFont($family, $style='', $file='')
 {
 	// Add a TrueType, OpenType or Type1 font
 	$family = strtolower($family);
@@ -502,13 +502,13 @@ function AddFont($family, $style='', $file='')
 	$this->fonts[$fontkey] = $info;
 }
 
-function SetFont($family, $style='', $size=0)
+public function SetFont($family, $style='', $size=0)
 {
 	// Select a font; size given in points
 	if($family=='')
-		$family = $this->FontFamily;
+		{$family = $this->FontFamily;}
 	else
-		$family = strtolower($family);
+		{$family = strtolower($family);}
 	$style = strtoupper($style);
 	if(strpos($style,'U')!==false)
 	{
@@ -516,31 +516,31 @@ function SetFont($family, $style='', $size=0)
 		$style = str_replace('U','',$style);
 	}
 	else
-		$this->underline = false;
+		{$this->underline = false;}
 	if($style=='IB')
-		$style = 'BI';
+		{$style = 'BI';}
 	if($size==0)
-		$size = $this->FontSizePt;
+		{$size = $this->FontSizePt;}
 	// Test if font is already selected
 	if($this->FontFamily==$family && $this->FontStyle==$style && $this->FontSizePt==$size)
-		return;
+		{return;}
 	// Test if font is already loaded
 	$fontkey = $family.$style;
 	if(!isset($this->fonts[$fontkey]))
 	{
 		// Test if one of the core fonts
 		if($family=='arial')
-			$family = 'helvetica';
+			{$family = 'helvetica';}
 		if(in_array($family,$this->CoreFonts))
 		{
 			if($family=='symbol' || $family=='zapfdingbats')
-				$style = '';
+				{$style = '';}
 			$fontkey = $family.$style;
 			if(!isset($this->fonts[$fontkey]))
-				$this->AddFont($family,$style);
+				{$this->AddFont($family,$style);}
 		}
 		else
-			$this->Error('Undefined font: '.$family.' '.$style);
+			{$this->Error('Undefined font: '.$family.' '.$style);}
 	}
 	// Select it
 	$this->FontFamily = $family;
@@ -549,18 +549,18 @@ function SetFont($family, $style='', $size=0)
 	$this->FontSize = $size/$this->k;
 	$this->CurrentFont = &$this->fonts[$fontkey];
 	if($this->page>0)
-		$this->_out(sprintf('BT /F%d %.2F Tf ET',$this->CurrentFont['i'],$this->FontSizePt));
+		{$this->_out(sprintf('BT /F%d %.2F Tf ET',$this->CurrentFont['i'],$this->FontSizePt));}
 }
 
 function SetFontSize($size)
 {
 	// Set font size in points
 	if($this->FontSizePt==$size)
-		return;
+		{return;}
 	$this->FontSizePt = $size;
 	$this->FontSize = $size/$this->k;
 	if($this->page>0)
-		$this->_out(sprintf('BT /F%d %.2F Tf ET',$this->CurrentFont['i'],$this->FontSizePt));
+		{$this->_out(sprintf('BT /F%d %.2F Tf ET',$this->CurrentFont['i'],$this->FontSizePt));}
 }
 
 function AddLink()
@@ -575,9 +575,9 @@ function SetLink($link, $y=0, $page=-1)
 {
 	// Set destination of internal link
 	if($y==-1)
-		$y = $this->y;
+		{$y = $this->y;}
 	if($page==-1)
-		$page = $this->page;
+		{$page = $this->page;}
 	$this->links[$link] = array($page, $y);
 }
 
@@ -592,9 +592,9 @@ function Text($x, $y, $txt)
 	// Output a string
 	$s = sprintf('BT %.2F %.2F Td (%s) Tj ET',$x*$this->k,($this->h-$y)*$this->k,$this->_escape($txt));
 	if($this->underline && $txt!='')
-		$s .= ' '.$this->_dounderline($x,$y,$txt);
+		{$s .= ' '.$this->_dounderline($x,$y,$txt);}
 	if($this->ColorFlag)
-		$s = 'q '.$this->TextColor.' '.$s.' Q';
+		{$s = 'q '.$this->TextColor.' '.$s.' Q';}
 	$this->_out($s);
 }
 
@@ -632,9 +632,9 @@ function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link
 	if($fill || $border==1)
 	{
 		if($fill)
-			$op = ($border==1) ? 'B' : 'f';
+			{$op = ($border==1) ? 'B' : 'f';}
 		else
-			$op = 'S';
+			{$op = 'S';}
 		$s = sprintf('%.2F %.2F %.2F %.2F re %s ',$this->x*$k,($this->h-$this->y)*$k,$w*$k,-$h*$k,$op);
 	}
 	if(is_string($border))
@@ -642,45 +642,45 @@ function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link
 		$x = $this->x;
 		$y = $this->y;
 		if(strpos($border,'L')!==false)
-			$s .= sprintf('%.2F %.2F m %.2F %.2F l S ',$x*$k,($this->h-$y)*$k,$x*$k,($this->h-($y+$h))*$k);
+			{$s .= sprintf('%.2F %.2F m %.2F %.2F l S ',$x*$k,($this->h-$y)*$k,$x*$k,($this->h-($y+$h))*$k);}
 		if(strpos($border,'T')!==false)
-			$s .= sprintf('%.2F %.2F m %.2F %.2F l S ',$x*$k,($this->h-$y)*$k,($x+$w)*$k,($this->h-$y)*$k);
+			{$s .= sprintf('%.2F %.2F m %.2F %.2F l S ',$x*$k,($this->h-$y)*$k,($x+$w)*$k,($this->h-$y)*$k);}
 		if(strpos($border,'R')!==false)
-			$s .= sprintf('%.2F %.2F m %.2F %.2F l S ',($x+$w)*$k,($this->h-$y)*$k,($x+$w)*$k,($this->h-($y+$h))*$k);
+			{$s .= sprintf('%.2F %.2F m %.2F %.2F l S ',($x+$w)*$k,($this->h-$y)*$k,($x+$w)*$k,($this->h-($y+$h))*$k);}
 		if(strpos($border,'B')!==false)
-			$s .= sprintf('%.2F %.2F m %.2F %.2F l S ',$x*$k,($this->h-($y+$h))*$k,($x+$w)*$k,($this->h-($y+$h))*$k);
+			{$s .= sprintf('%.2F %.2F m %.2F %.2F l S ',$x*$k,($this->h-($y+$h))*$k,($x+$w)*$k,($this->h-($y+$h))*$k);}
 	}
 	if($txt!=='')
 	{
 		if($align=='R')
-			$dx = $w-$this->cMargin-$this->GetStringWidth($txt);
+			{$dx = $w-$this->cMargin-$this->GetStringWidth($txt);}
 		elseif($align=='C')
-			$dx = ($w-$this->GetStringWidth($txt))/2;
+			{$dx = ($w-$this->GetStringWidth($txt))/2;}
 		else
-			$dx = $this->cMargin;
+			{$dx = $this->cMargin;}
 		if($this->ColorFlag)
-			$s .= 'q '.$this->TextColor.' ';
+			{$s .= 'q '.$this->TextColor.' ';}
 		$txt2 = str_replace(')','\\)',str_replace('(','\\(',str_replace('\\','\\\\',$txt)));
 		$s .= sprintf('BT %.2F %.2F Td (%s) Tj ET',($this->x+$dx)*$k,($this->h-($this->y+.5*$h+.3*$this->FontSize))*$k,$txt2);
 		if($this->underline)
-			$s .= ' '.$this->_dounderline($this->x+$dx,$this->y+.5*$h+.3*$this->FontSize,$txt);
+			{$s .= ' '.$this->_dounderline($this->x+$dx,$this->y+.5*$h+.3*$this->FontSize,$txt);}
 		if($this->ColorFlag)
-			$s .= ' Q';
+			{$s .= ' Q';}
 		if($link)
-			$this->Link($this->x+$dx,$this->y+.5*$h-.5*$this->FontSize,$this->GetStringWidth($txt),$this->FontSize,$link);
+			{$this->Link($this->x+$dx,$this->y+.5*$h-.5*$this->FontSize,$this->GetStringWidth($txt),$this->FontSize,$link);}
 	}
 	if($s)
-		$this->_out($s);
+		{$this->_out($s);}
 	$this->lasth = $h;
 	if($ln>0)
 	{
 		// Go to next line
 		$this->y += $h;
 		if($ln==1)
-			$this->x = $this->lMargin;
+			{$this->x = $this->lMargin;}
 	}
 	else
-		$this->x += $w;
+		{$this->x += $w;}
 }
 
 function MultiCell($w, $h, $txt, $border=0, $align='J', $fill=false)
@@ -688,12 +688,12 @@ function MultiCell($w, $h, $txt, $border=0, $align='J', $fill=false)
 	// Output text with automatic or explicit line breaks
 	$cw = &$this->CurrentFont['cw'];
 	if($w==0)
-		$w = $this->w-$this->rMargin-$this->x;
+		{$w = $this->w-$this->rMargin-$this->x;}
 	$wmax = ($w-2*$this->cMargin)*1000/$this->FontSize;
 	$s = str_replace("\r",'',$txt);
 	$nb = strlen($s);
 	if($nb>0 && $s[$nb-1]=="\n")
-		$nb--;
+		{$nb--;}
 	$b = 0;
 	if($border)
 	{
@@ -739,7 +739,7 @@ function MultiCell($w, $h, $txt, $border=0, $align='J', $fill=false)
 			$ns = 0;
 			$nl++;
 			if($border && $nl==2)
-				$b = $b2;
+				{$b = $b2;}
 			continue;
 		}
 		if($c==' ')
