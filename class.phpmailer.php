@@ -1408,7 +1408,7 @@ class PHPMailer
                         $this->smtp->hello($hello);
                     }
                     if (
-                        $this->SMTPAuth && 
+                        $this->SMTPAuth &&
                         !$this->smtp->authenticate(
                             $this->Username,
                             $this->Password,
@@ -1447,7 +1447,7 @@ class PHPMailer
         if ($this->smtp !== null && $this->smtp->connected()) {
             $this->smtp->quit();
             $this->smtp->close();
-        }        
+        }
     }
 
     /**
@@ -1958,12 +1958,12 @@ class PHPMailer
     }
 
     // Get encoding and charset data for body or altBody
-    private function getEncodingData($bodyContent, $isAlt = false)
+    private function getEncodingData($bodyContent)
     {
         $bodyEncoding = $this->Encoding;
         $bodyCharSet = $this->CharSet;
 
-        if ($bodyEncoding == '8bit' and !$this->has8bitChars($bodyContent)) {
+        if ($bodyEncoding == '8bit' && !$this->has8bitChars($bodyContent)) {
             $bodyEncoding = '7bit';
             $bodyCharSet = 'us-ascii';
         }
@@ -1999,7 +1999,7 @@ class PHPMailer
     }
 
     // Generate body for inline and attachment message type
-    private function generateInlineAttachBody($mimepre, $bodyEncodingData, $altBodyEncodingData)
+    private function generateInlineAttachBody($mimepre, $bodyEncodingData)
     {
         $body = $mimepre;
         $body .= $this->textLine('--' . $this->boundary[1]);
@@ -2037,51 +2037,48 @@ class PHPMailer
     // Sign email body if required
     private function signEmailBody($body)
     {
-        try {
-            if (!defined('PKCS7_TEXT')) {
-                throw new phpmailerException($this->lang('extension_missing') . 'openssl');
-            }
+        if (!defined('PKCS7_TEXT')) {
+            throw new phpmailerException($this->lang('extension_missing') . 'openssl');
+        }
 
-            $file = tempnam(sys_get_temp_dir(), 'mail');
-            if (false === file_put_contents($file, $body)) {
-                throw new phpmailerException($this->lang('signing') . ' Could not write temp file');
-            }
+        $file = tempnam(sys_get_temp_dir(), 'mail');
+        if (false === file_put_contents($file, $body)) {
+            throw new phpmailerException($this->lang('signing') . ' Could not write temp file');
+        }
 
-            $signed = tempnam(sys_get_temp_dir(), 'signed');
-            if (empty($this->sign_extracerts_file)) {
-                $sign = @openssl_pkcs7_sign(
-                    $file,
-                    $signed,
-                    'file://' . realpath($this->sign_cert_file),
-                    array('file://' . realpath($this->sign_key_file), $this->sign_key_pass),
-                    null
-                );
-            } else {
-                $sign = @openssl_pkcs7_sign(
-                    $file,
-                    $signed,
-                    'file://' . realpath($this->sign_cert_file),
-                    array('file://' . realpath($this->sign_key_file), $this->sign_key_pass),
-                    null,
-                    PKCS7_DETACHED,
-                    $this->sign_extracerts_file
-                );
-            }
+        $signed = tempnam(sys_get_temp_dir(), 'signed');
+        if (empty($this->sign_extracerts_file)) {
+            $sign = @openssl_pkcs7_sign(
+                $file,
+                $signed,
+                'file://' . realpath($this->sign_cert_file),
+                array('file://' . realpath($this->sign_key_file), $this->sign_key_pass),
+                null
+            );
+        } else {
+            $sign = @openssl_pkcs7_sign(
+                $file,
+                $signed,
+                'file://' . realpath($this->sign_cert_file),
+                array('file://' . realpath($this->sign_key_file), $this->sign_key_pass),
+                null,
+                PKCS7_DETACHED,
+                $this->sign_extracerts_file
+            );
+        }
 
-            if ($sign) {
-                @unlink($file);
-                $body = file_get_contents($signed);
-                @unlink($signed);
-                $parts = explode("\n\n", $body, 2);
-                $this->MIMEHeader .= $parts[0] . $this->LE;
-                $body = $parts[1];
-            }
-        } catch (phpmailerException $e) {
-            throw $e;
+        if ($sign) {
+            @unlink($file);
+            $body = file_get_contents($signed);
+            @unlink($signed);
+            $parts = explode("\n\n", $body, 2);
+            $this->MIMEHeader .= $parts[0] . $this->LE;
+            $body = $parts[1];
         }
 
         return $body;
     }
+
 
     /**
      * Return the start of a message boundary.
