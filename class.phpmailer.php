@@ -227,7 +227,6 @@ class PHPMailer
     /**
      * The default SMTP server port.
      * @type integer
-     * @TODO Why is this needed when the SMTP class takes care of it?
      */
     public $Port = 25;
 
@@ -3626,7 +3625,6 @@ class phpmailerException extends Exception
      */
     public function errorMessage()
     {
-        $errorMsg = '<strong>' . $this->getMessage() . "</strong><br />\n";
-        return $errorMsg;
+        return '<strong>' . $this->getMessage() . "</strong><br />\n";
     }
 }
