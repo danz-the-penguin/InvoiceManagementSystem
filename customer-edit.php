@@ -25,30 +25,6 @@ if ($result && mysqli_num_rows($result) > 0) {
     $customerData = []; // Initialize empty array in case no result
 }
 
-
-// // mysqli select query
-// if($result) {
-//     while ($row = mysqli_fetch_assoc($result)) {
-
-//         $customer_name = $row['name']; // customer name
-//         $customer_email = $row['email']; // customer email
-//         $customer_address_1 = $row['address_1']; // customer address
-//         $customer_address_2 = $row['address_2']; // customer address
-//         $customer_town = $row['town']; // customer town
-//         $customer_county = $row['county']; // customer county
-//         $customer_postcode = $row['postcode']; // customer postcode
-//         $customer_phone = $row['phone']; // customer phone number
-
-//         //shipping
-//         $customer_name_ship = $row['name_ship']; // customer name (shipping)
-//         $customer_address_1_ship = $row['address_1_ship']; // customer address (shipping)
-//         $customer_address_2_ship = $row['address_2_ship']; // customer address (shipping)
-//         $customer_town_ship = $row['town_ship']; // customer town (shipping)
-//         $customer_county_ship = $row['county_ship']; // customer county (shipping)
-//         $customer_postcode_ship = $row['postcode_ship']; // customer postcode (shipping)
-//     }
-// }
-
 // Function to handle form population
 function populateField($row, $field) {
     return isset($row[$field]) ? htmlspecialchars($row[$field], ENT_QUOTES, 'UTF-8') : '';
