@@ -1,12 +1,12 @@
 <?php
 /*******************************************************************************
-* Invoice Management System                                               *
+* Invoice Management System                                                    *
 *                                                                              *
 * Version: 1.0	                                                               *
-* Developer:  Abhishek Raj                                    				   *
+* Developer:  Abhishek Raj                                				       *
 *******************************************************************************/
 
-include('header.php');
+include_once'header.php';
 
 // Connect to the database
 $mysqli = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME);
@@ -56,4 +56,4 @@ if($_POST['username'] != "" && $_POST['password'] != "") {
 }
 ?>
 
-<?php include('footer.php'); ?>
+<?php include_once'footer.php'; ?>
