@@ -1,27 +1,27 @@
 <?php
-/*******************************************************************************
-* Invoice Management System                                                    *
-*                                                                              *
+/******************************************************************************* 
+* Invoice Management System                                                    
+*                                                                              
 * Version: 1.0	                                                               *
 * Developer:  Abhishek Raj                                				       *
 *******************************************************************************/
 
-include_once'header.php';
+include_once 'header.php';
 
 // Connect to the database
 $mysqli = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME);
 
-// output any connection error
+// Output any connection error
 if ($mysqli->connect_error) {
-	die('Error : ('.$mysqli->connect_errno .') '. $mysqli->connect_error);
+    die('Error : (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 }
 
 session_start();
-if($_POST['username'] != "" && $_POST['password'] != "") {
+if ($_POST['username'] != "" && $_POST['password'] != "") {
     extract($_POST);
 
-    $username = mysqli_real_escape_string($mysqli,$_POST['username']);
-    $pass_encrypt = mysqli_real_escape_string($mysqli,$_POST['password']);
+    $username = mysqli_real_escape_string($mysqli, $_POST['username']);
+    $pass_encrypt = mysqli_real_escape_string($mysqli, $_POST['password']);
 
     // Prepare the query to prevent SQL injection
     $stmt = $mysqli->prepare("SELECT * FROM `users` WHERE `username` = ?");
@@ -37,7 +37,7 @@ if($_POST['username'] != "" && $_POST['password'] != "") {
         
         // Verify password using password_verify (assuming stored password is hashed)
         if (password_verify($pass_encrypt, $row['password'])) {
-            $_SESSION['login_username'] = $row['username'];    
+            $_SESSION['login_username'] = $row['username'];
             echo 1;  // Successful login
         } else {
             echo 0;  // Incorrect password
@@ -56,4 +56,4 @@ if($_POST['username'] != "" && $_POST['password'] != "") {
 }
 ?>
 
-<?php include_once'footer.php'; ?>
+<?php include_once 'footer.php'; ?>
