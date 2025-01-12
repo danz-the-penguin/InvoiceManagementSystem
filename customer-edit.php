@@ -125,23 +125,38 @@ $mysqli->close();
                 </div>
                 <div class="panel-body form-group form-group-sm">
                     <div class="row">
-                    <?php
-                            // Fields for shipping information
-                            $shippingFields = [
+                        <div class="col-xs-6">
+                            <?php
+                            // Fields for shipping information (first column)
+                            $shippingFields1 = [
                                 'customer_name_ship' => 'name_ship',
                                 'customer_address_1_ship' => 'address_1_ship',
-                                'customer_address_2_ship' => 'address_2_ship',
+                                'customer_address_2_ship' => 'address_2_ship'
+                            ];
+
+                            foreach ($shippingFields1 as $field => $dbColumn) {
+                                echo "<div class='form-group'>
+                                        <input type='text' class='form-control margin-bottom required' name='$field' id='$field' placeholder='" . ucfirst(str_replace('_', ' ', $field)) . "' value='" . populateField($customerData, $dbColumn) . "'>
+                                    </div>";
+                            }
+                            ?>
+                        </div>
+                        <div class="col-xs-6">
+                            <?php
+                            // Fields for shipping information (second column)
+                            $shippingFields2 = [
                                 'customer_town_ship' => 'town_ship',
                                 'customer_county_ship' => 'county_ship',
                                 'customer_postcode_ship' => 'postcode_ship'
                             ];
 
-                            foreach ($shippingFields as $field => $dbColumn) {
+                            foreach ($shippingFields2 as $field => $dbColumn) {
                                 echo "<div class='form-group'>
                                         <input type='text' class='form-control margin-bottom required' name='$field' id='$field' placeholder='" . ucfirst(str_replace('_', ' ', $field)) . "' value='" . populateField($customerData, $dbColumn) . "'>
-                                      </div>";
+                                    </div>";
                             }
                             ?>
+                        </div>
                     </div>
                 </div>
             </div>
