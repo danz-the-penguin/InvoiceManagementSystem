@@ -6,9 +6,9 @@
 * Developer: Abhishek Raj
 *******************************************************************************/
 
-include('header.php');
-include('functions.php');
-include_once("includes/config.php");
+include'header.php';
+include'functions.php';
+include_once"includes/config.php";
 
 function getTotalSalesAmount($mysqli) {
     $result = mysqli_query($mysqli, 'SELECT SUM(subtotal) AS value_sum FROM invoices WHERE status = "paid"');
