@@ -525,8 +525,8 @@ class invoicr extends FPDF_rotation
 				$document['w'] = 215.9;
 				$document['h'] = 355.6;
 				break;
-			default:
 			case 'A4':
+			default:
 				$document['w'] = 210;
 				$document['h'] = 297;
 				break;
