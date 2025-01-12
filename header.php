@@ -1,6 +1,6 @@
 <?php
 	//check login
-	include("session.php");
+	include"session.php";
 ?>
 
 
@@ -62,7 +62,7 @@
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <button class="sidebar-toggle" data-toggle="offcanvas" aria-label="Toggle Sidebar"></button>
         <span class="sr-only">Toggle navigation</span>
       </a>
       <!-- Navbar Right Menu -->
@@ -74,7 +74,7 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="https://pcrt.crab.org/images/default-user.png" class="user-image" alt="User Image">
+              <img src="https://pcrt.crab.org/images/default-user.png" class="user-image" alt="User">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs"><?php echo $_SESSION['login_username'];?></span>
             </a>

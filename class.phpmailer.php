@@ -357,7 +357,6 @@ class PHPMailer
     /**
      * Storage for addresses when SingleTo is enabled.
      * @type array
-     * @TODO This should really not be public
      */
     public $SingleToArray = array();
 

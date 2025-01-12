@@ -28,13 +28,13 @@ include_once'header.php';
 								<input type="text" class="form-control margin-bottom copy-input required" name="customer_name" id="customer_name" placeholder="Enter Name">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control margin-bottom copy-input required" name="customer_address_1" id="customer_address_1" placeholder="Address 1">	
+								<input type="text" class="form-control margin-bottom copy-input required" name="customer_address_1" id="customer_address_1" placeholder="Address 1">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control margin-bottom copy-input required" name="customer_town" id="customer_town" placeholder="Town/City">		
+								<input type="text" class="form-control margin-bottom copy-input required" name="customer_town" id="customer_town" placeholder="Town/City">
 							</div>
 							<div class="form-group no-margin-bottom">
-								<input type="text" class="form-control copy-input required" name="customer_postcode" id="customer_postcode" placeholder="Postcode">					
+								<input type="text" class="form-control copy-input required" name="customer_postcode" id="customer_postcode" placeholder="Postcode">
 							</div>
 						</div>
 						<div class="col-xs-6">
@@ -68,7 +68,7 @@ include_once'header.php';
 								<input type="text" class="form-control margin-bottom required" name="customer_name_ship" id="customer_name_ship" placeholder="Enter name">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control margin-bottom" name="customer_address_2_ship" id="customer_address_2_ship" placeholder="Address 2">	
+								<input type="text" class="form-control margin-bottom" name="customer_address_2_ship" id="customer_address_2_ship" placeholder="Address 2">
 							</div>
 							<div class="form-group no-margin-bottom">
 								<input type="text" class="form-control required" name="customer_county_ship" id="customer_county_ship" placeholder="Country">
@@ -79,7 +79,7 @@ include_once'header.php';
 						    	<input type="text" class="form-control margin-bottom required" name="customer_address_1_ship" id="customer_address_1_ship" placeholder="Address 1">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control margin-bottom required" name="customer_town_ship" id="customer_town_ship" placeholder="Town/City">							
+								<input type="text" class="form-control margin-bottom required" name="customer_town_ship" id="customer_town_ship" placeholder="Town/City">
 						    </div>
 						    <div class="form-group no-margin-bottom">
 						    	<input type="text" class="form-control required" name="customer_postcode_ship" id="customer_postcode_ship" placeholder="Postcode">

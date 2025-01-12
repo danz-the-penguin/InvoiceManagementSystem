@@ -1,6 +1,6 @@
 <?php
 	//check login
-	include("session.php");
+	include"session.php";
 ?>
 
 <!doctype html>
@@ -43,8 +43,8 @@
 
 		<div class="top-buttons btn-group">
 			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Invoices <span class="caret"></span></button>
-		  	<ul class="dropdown-menu" role="menu">	
-		  		<li><a href="invoice-create.php">Create Invoice</a></li>	    
+		  	<ul class="dropdown-menu">
+		  		<li><a href="invoice-create.php">Create Invoice</a></li>
 				<li><a href="invoice-list.php">Manage Invoices</a></li>
 				<li><a href="#" class="download-csv">Download CSV</a></li>
 		  	</ul>
@@ -52,30 +52,33 @@
 
 		<div class="top-buttons btn-group">
 			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Items <span class="caret"></span></button>
-		  	<ul class="dropdown-menu" role="menu">	
-		  		<li><a href="product-add.php">Add Item</a></li>	    
+		  	<ul class="dropdown-menu">
+		  		<li><a href="product-add.php">Add Item</a></li>
 				<li><a href="product-list.php">Manage Item</a></li>
 		  	</ul>
 		</div>
 
 		<div class="top-buttons btn-group">
 			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Customers <span class="caret"></span></button>
-		  	<ul class="dropdown-menu" role="menu">	
-		  		<li><a href="customer-add.php">Add Customer</a></li>	    
+		  	<ul class="dropdown-menu">
+		  		<li><a href="customer-add.php">Add Customer</a></li>
 				<li><a href="customer-list.php">Manage Customers</a></li>
 		  	</ul>
 		</div>
 
 		<div class="top-buttons btn-group">
 			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Users <span class="caret"></span></button>
-		  	<ul class="dropdown-menu" role="menu">	
-		  		<li><a href="user-add.php">Add User</a></li>	    
+		  	<ul class="dropdown-menu">
+		  		<li><a href="user-add.php">Add User</a></li>
 				<li><a href="user-list.php">Manage Users</a></li>
 		  	</ul>
 		</div>
 
 		<div class="top-buttons float-right btn-group">
-			<a class="btn btn-primary float-right" href="logout.php" role="button">Logout</a>
+		<button class="btn btn-primary float-right" onclick="window.location.href='logout.php';" aria-label="Logout">
+			Logout
+		</button>
+
 		</div>
 
 		<div class="top-buttons btn-group float-right">

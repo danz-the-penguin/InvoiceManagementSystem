@@ -1,7 +1,7 @@
 <?php
 
 
-include_once("includes/config.php");
+include_once"includes/config.php";
 
 // get invoice list
 function getInvoices() {
@@ -15,7 +15,7 @@ function getInvoices() {
 	}
 
 	// the query
-    $query = "SELECT * 
+    $query = "SELECT *
 		FROM invoices i
 		JOIN customers c
 		ON c.invoice = i.invoice
@@ -75,7 +75,7 @@ function getInvoices() {
 	// Frees the memory associated with a result
 	$results->free();
 
-	// close connection 
+	// close connection
 	$mysqli->close();
 
 }
@@ -99,18 +99,16 @@ function getInvoiceId() {
 
 	    $row = mysqli_fetch_assoc($result);
 
-	    //var_dump($row);
-
 	    if($row_cnt == 0){
 			echo INVOICE_INITIAL_VALUE;
 		} else {
-			echo $row['invoice'] + 1; 
+			echo $row['invoice'] + 1;
 		}
 
 	    // Frees the memory associated with a result
 		$result->free();
 
-		// close connection 
+		// close connection
 		$mysqli->close();
 	}
 	
@@ -150,7 +148,7 @@ function popProductsList() {
 	// Frees the memory associated with a result
 	$results->free();
 
-	// close connection 
+	// close connection
 	$mysqli->close();
 
 }
@@ -206,7 +204,7 @@ function popCustomersList() {
 	// Frees the memory associated with a result
 	$results->free();
 
-	// close connection 
+	// close connection
 	$mysqli->close();
 
 }
@@ -262,7 +260,7 @@ function getProducts() {
 	// Frees the memory associated with a result
 	$results->free();
 
-	// close connection 
+	// close connection
 	$mysqli->close();
 }
 
@@ -319,7 +317,7 @@ function getUsers() {
 	// Frees the memory associated with a result
 	$results->free();
 
-	// close connection 
+	// close connection
 	$mysqli->close();
 }
 
@@ -374,9 +372,6 @@ function getCustomers() {
 	// Frees the memory associated with a result
 	$results->free();
 
-	// close connection 
+	// close connection
 	$mysqli->close();
 }
-
-?>
-

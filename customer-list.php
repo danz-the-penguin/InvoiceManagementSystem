@@ -1,8 +1,8 @@
 <?php
 
 
-include('header.php');
-include('functions.php');
+include'header.php';
+include'functions.php';
 
 ?>
 
@@ -47,5 +47,5 @@ include('functions.php');
 </div><!-- /.modal -->
 
 <?php
-	include('footer.php');
+	include'footer.php';
 ?>
