@@ -4,7 +4,7 @@
 *                                                                              *
 * Version: 1.7                                                                 *
 * Date:    2011-06-18                                                          *
-* Author:  Olivier PLATHEY                  									*	
+* Author:  Olivier PLATHEY                  									*
 * Url: http://www.fpdf.org/														*
 *******************************************************************************/
 
@@ -12,69 +12,69 @@ define('FPDF_VERSION','1.7');
 
 class FPDF
 {
-var $page;               // current page number
-var $n;                  // current object number
-var $offsets;            // array of object offsets
-var $buffer;             // buffer holding in-memory PDF
-var $pages;              // array containing pages
-var $state;              // current document state
-var $compress;           // compression flag
-var $k;                  // scale factor (number of points in user unit)
-var $DefOrientation;     // default orientation
-var $CurOrientation;     // current orientation
-var $StdPageSizes;       // standard page sizes
-var $DefPageSize;        // default page size
-var $CurPageSize;        // current page size
-var $PageSizes;          // used for pages with non default sizes or orientations
-var $wPt, $hPt;          // dimensions of current page in points
-var $w, $h;              // dimensions of current page in user unit
-var $lMargin;            // left margin
-var $tMargin;            // top margin
-var $rMargin;            // right margin
-var $bMargin;            // page break margin
-var $cMargin;            // cell margin
-var $x, $y;              // current position in user unit
-var $lasth;              // height of last printed cell
-var $LineWidth;          // line width in user unit
-var $fontpath;           // path containing fonts
-var $CoreFonts;          // array of core font names
-var $fonts;              // array of used fonts
-var $FontFiles;          // array of font files
-var $diffs;              // array of encoding differences
-var $FontFamily;         // current font family
-var $FontStyle;          // current font style
-var $underline;          // underlining flag
-var $CurrentFont;        // current font info
-var $FontSizePt;         // current font size in points
-var $FontSize;           // current font size in user unit
-var $DrawColor;          // commands for drawing color
-var $FillColor;          // commands for filling color
-var $TextColor;          // commands for text color
-var $ColorFlag;          // indicates whether fill and text colors are different
-var $ws;                 // word spacing
-var $images;             // array of used images
-var $PageLinks;          // array of links in pages
-var $links;              // array of internal links
-var $AutoPageBreak;      // automatic page breaking
-var $PageBreakTrigger;   // threshold used to trigger page breaks
-var $InHeader;           // flag set when processing header
-var $InFooter;           // flag set when processing footer
-var $ZoomMode;           // zoom display mode
-var $LayoutMode;         // layout display mode
-var $title;              // title
-var $subject;            // subject
-var $author;             // author
-var $keywords;           // keywords
-var $creator;            // creator
-var $AliasNbPages;       // alias for total number of pages
-var $PDFVersion;         // PDF version number
+public $page;               // current page number
+public $n;                  // current object number
+public $offsets;            // array of object offsets
+public $buffer;             // buffer holding in-memory PDF
+public $pages;              // array containing pages
+public $state;              // current document state
+public $compress;           // compression flag
+public $k;                  // scale factor (number of points in user unit)
+public $DefOrientation;     // default orientation
+public $CurOrientation;     // current orientation
+public $StdPageSizes;       // standard page sizes
+public $DefPageSize;        // default page size
+public $CurPageSize;        // current page size
+public $PageSizes;          // used for pages with non default sizes or orientations
+public $wPt, $hPt;          // dimensions of current page in points
+public $w, $h;              // dimensions of current page in user unit
+public $lMargin;            // left margin
+public $tMargin;            // top margin
+public $rMargin;            // right margin
+public $bMargin;            // page break margin
+public $cMargin;            // cell margin
+public $x, $y;              // current position in user unit
+public $lasth;              // height of last printed cell
+public $LineWidth;          // line width in user unit
+public $fontpath;           // path containing fonts
+public $CoreFonts;          // array of core font names
+public $fonts;              // array of used fonts
+public $FontFiles;          // array of font files
+public $diffs;              // array of encoding differences
+public $FontFamily;         // current font family
+public $FontStyle;          // current font style
+public $underline;          // underlining flag
+public $CurrentFont;        // current font info
+public $FontSizePt;         // current font size in points
+public $FontSize;           // current font size in user unit
+public $DrawColor;          // commands for drawing color
+public $FillColor;          // commands for filling color
+public $TextColor;          // commands for text color
+public $ColorFlag;          // indicates whether fill and text colors are different
+public $ws;                 // word spacing
+public $images;             // array of used images
+public $PageLinks;          // array of links in pages
+public $links;              // array of internal links
+public $AutoPageBreak;      // automatic page breaking
+public $PageBreakTrigger;   // threshold used to trigger page breaks
+public $InHeader;           // flag set when processing header
+public $InFooter;           // flag set when processing footer
+public $ZoomMode;           // zoom display mode
+public $LayoutMode;         // layout display mode
+public $title;              // title
+public $subject;            // subject
+public $author;             // author
+public $keywords;           // keywords
+public $creator;            // creator
+public $AliasNbPages;       // alias for total number of pages
+public $PDFVersion;         // PDF version number
 
 /*******************************************************************************
 *                                                                              *
 *                               Public methods                                 *
 *                                                                              *
 *******************************************************************************/
-function FPDF($orientation='P', $unit='mm', $size='A4')
+function __construct($orientation='P', $unit='mm', $size='A4')
 {
 	// Some checks
 	$this->_dochecks();
@@ -109,23 +109,27 @@ function FPDF($orientation='P', $unit='mm', $size='A4')
 		if(substr($this->fontpath,-1)!='/' && substr($this->fontpath,-1)!='\\')
 			$this->fontpath .= '/';
 	}
-	elseif(is_dir(dirname(__FILE__).'/font'))
+	if (is_dir(dirname(__FILE__).'/font')) {
 		$this->fontpath = dirname(__FILE__).'/font/';
-	else
+	} else {
 		$this->fontpath = '';
+	}
+	
 	// Core fonts
 	$this->CoreFonts = array('courier', 'helvetica', 'times', 'symbol', 'zapfdingbats');
+	
 	// Scale factor
-	if($unit=='pt')
+	if ($unit == 'pt') {
 		$this->k = 1;
-	elseif($unit=='mm')
+	} elseif ($unit == 'mm') {
 		$this->k = 72/25.4;
-	elseif($unit=='cm')
+	} elseif ($unit == 'cm') {
 		$this->k = 72/2.54;
-	elseif($unit=='in')
+	} elseif ($unit == 'in') {
 		$this->k = 72;
-	else
+	} else {
 		$this->Error('Incorrect unit: '.$unit);
+	}	
 	// Page sizes
 	$this->StdPageSizes = array('a3'=>array(841.89,1190.55), 'a4'=>array(595.28,841.89), 'a5'=>array(420.94,595.28),
 		'letter'=>array(612,792), 'legal'=>array(612,1008));
