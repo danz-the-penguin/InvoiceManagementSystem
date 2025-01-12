@@ -23,16 +23,31 @@ if($_POST['username'] != "" && $_POST['password'] != "") {
     $username = mysqli_real_escape_string($mysqli,$_POST['username']);
     $pass_encrypt = mysqli_real_escape_string($mysqli,$_POST['password']);
 
-    $fetch = $mysqli->query("SELECT * FROM `users` WHERE username='$username' AND `password` = '$pass_encrypt'");
+    // Prepare the query to prevent SQL injection
+    $stmt = $mysqli->prepare("SELECT * FROM `users` WHERE `username` = ?");
+    $stmt->bind_param("s", $username);  // Bind the parameter to the prepared statement
 
-    $row = mysqli_fetch_array($fetch);
+    // Execute the query
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if (password_verify($pass_encrypt, $row['passowrd']){
-        $_SESSION['login_username'] = $row['username'];    
-        echo 1;  
+    // Check if user is found
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        // Verify password using password_verify (assuming stored password is hashed)
+        if (password_verify($pass_encrypt, $row['password'])) {
+            $_SESSION['login_username'] = $row['username'];    
+            echo 1;  // Successful login
+        } else {
+            echo 0;  // Incorrect password
+        }
     } else {
-        echo 0;
+        echo 0;  // No user found
     }
+
+    // Close the statement
+    $stmt->close();
 
 } else {
 
