@@ -1373,12 +1373,11 @@ class PHPMailer
             }
             //Do we need the OpenSSL extension?
             $sslext = defined('OPENSSL_ALGO_SHA1');
-            if ('tls' === $secure or 'ssl' === $secure) {
-                //Check for an OpenSSL constant rather than using extension_loaded, which is sometimes disabled
-                if (!$sslext) {
-                    throw new phpmailerException($this->lang('extension_missing').'openssl', self::STOP_CRITICAL);
-                }
+            if (($secure === 'tls' || $secure === 'ssl') && !$sslext) {
+                // Check for an OpenSSL constant rather than using extension_loaded, which is sometimes disabled
+                throw new phpmailerException($this->lang('extension_missing').'openssl', self::STOP_CRITICAL);
             }
+            
             $host = $hostinfo[3];
             $port = $this->Port;
             $tport = (integer)$hostinfo[4];
@@ -1408,18 +1407,19 @@ class PHPMailer
                         // We must resend HELO after tls negotiation
                         $this->smtp->hello($hello);
                     }
-                    if ($this->SMTPAuth) {
-                        if (!$this->smtp->authenticate(
+                    if (
+                        $this->SMTPAuth && 
+                        !$this->smtp->authenticate(
                             $this->Username,
                             $this->Password,
                             $this->AuthType,
                             $this->Realm,
                             $this->Workstation
                         )
-                        ) {
-                            throw new phpmailerException($this->lang('authenticate'));
-                        }
+                    ) {
+                        throw new phpmailerException($this->lang('authenticate'));
                     }
+                    
                     return true;
                 } catch (phpmailerException $exc) {
                     $lastexception = $exc;
@@ -1444,12 +1444,10 @@ class PHPMailer
      */
     public function smtpClose()
     {
-        if ($this->smtp !== null) {
-            if ($this->smtp->connected()) {
-                $this->smtp->quit();
-                $this->smtp->close();
-            }
-        }
+        if ($this->smtp !== null && $this->smtp->connected()) {
+            $this->smtp->quit();
+            $this->smtp->close();
+        }        
     }
 
     /**
