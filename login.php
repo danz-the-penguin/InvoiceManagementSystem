@@ -27,7 +27,7 @@ if($_POST['username'] != "" && $_POST['password'] != "") {
 
     $row = mysqli_fetch_array($fetch);
 
-    if (password_verify($pass_encrypt, $row['passowrd']){
+    if (password_verify($pass_encrypt, $row['passowrd'])){
         $_SESSION['login_username'] = $row['username'];    
         echo 1;  
     } else {
