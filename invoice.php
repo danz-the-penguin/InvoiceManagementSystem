@@ -111,7 +111,7 @@ class invoicr extends FPDF_rotation
 		$this->flipflop = true;
 	}
 	
-	function addItem($item,$description,$quantity,$vat,$price,$total,$discount=0)
+	public function addItem($item,$description,$quantity,$vat,$price,$total,$discount=0)
 	{
 		$p['item'] 			= $item;
 		$p['description'] 	= $this->br2nl($description);
