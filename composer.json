@@ -1,5 +1,5 @@
 {
-    "name": "tests",
+    "name": "invoicemanagementsystem/app",
     "description": "Testings",
     "require": {
         "php": ">=7.4"
