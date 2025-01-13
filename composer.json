@@ -3,7 +3,7 @@
     "description": "Testings",
     "require": {
         "php": ">=7.4"
-    },
+    }
 }
 {
     "require-dev": {
