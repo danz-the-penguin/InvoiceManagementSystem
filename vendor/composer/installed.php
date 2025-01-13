@@ -1,19 +1,19 @@
 <?php return array(
     'root' => array(
-        'name' => '__root__',
+        'name' => 'invoicemanagementsystem/app',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'f026f9315f7d083c8a4c6d2bcce2b0387f4f3daf',
+        'reference' => '7bb0a5ab11c69bd5338ff2070420786ab5c878da',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        '__root__' => array(
+        'invoicemanagementsystem/app' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'f026f9315f7d083c8a4c6d2bcce2b0387f4f3daf',
+            'reference' => '7bb0a5ab11c69bd5338ff2070420786ab5c878da',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -101,9 +101,9 @@
             'dev_requirement' => true,
         ),
         'phpunit/phpunit' => array(
-            'pretty_version' => '11.0.0',
-            'version' => '11.0.0.0',
-            'reference' => 'ece3536c22fc5113906a42e7e82de00baaef36d0',
+            'pretty_version' => '11.5.3',
+            'version' => '11.5.3.0',
+            'reference' => '30e319e578a7b5da3543073e30002bf82042f701',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
@@ -241,6 +241,15 @@
             'reference' => 'c687e3387b99f5b03b6caa64c74b63e2936ff874',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sebastian/version',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'staabm/side-effects-detector' => array(
+            'pretty_version' => '1.0.5',
+            'version' => '1.0.5.0',
+            'reference' => 'd8334211a140ce329c13726d4a715adbddd0a163',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../staabm/side-effects-detector',
             'aliases' => array(),
             'dev_requirement' => true,
         ),

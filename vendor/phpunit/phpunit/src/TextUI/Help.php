@@ -23,6 +23,8 @@ use PHPUnit\Util\Color;
 use SebastianBergmann\Environment\Console;
 
 /**
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
+ *
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
 final class Help
@@ -30,7 +32,7 @@ final class Help
     private const LEFT_MARGIN              = '  ';
     private int $lengthOfLongestOptionName = 0;
     private readonly int $columnsAvailableForDescription;
-    private ?bool $hasColor;
+    private bool $hasColor;
 
     public function __construct(?int $width = null, ?bool $withColor = null)
     {
@@ -47,7 +49,7 @@ final class Help
         foreach ($this->elements() as $options) {
             foreach ($options as $option) {
                 if (isset($option['arg'])) {
-                    $this->lengthOfLongestOptionName = max($this->lengthOfLongestOptionName, isset($option['arg']) ? strlen($option['arg']) : 0);
+                    $this->lengthOfLongestOptionName = max($this->lengthOfLongestOptionName, strlen($option['arg']));
                 }
             }
         }
@@ -142,7 +144,7 @@ final class Help
     }
 
     /**
-     * @psalm-return array<non-empty-string, non-empty-list<array{text: non-empty-string}|array{arg: non-empty-string, desc: non-empty-string}|array{spacer: ''}>>
+     * @return array<non-empty-string, non-empty-list<array{arg: non-empty-string, desc: non-empty-string}|array{spacer: ''}|array{text: non-empty-string}>>
      */
     private function elements(): array
     {
@@ -155,7 +157,8 @@ final class Help
                 ['arg' => '--bootstrap <file>', 'desc' => 'A PHP script that is included before the tests run'],
                 ['arg' => '-c|--configuration <file>', 'desc' => 'Read configuration from XML file'],
                 ['arg' => '--no-configuration', 'desc' => 'Ignore default configuration file (phpunit.xml)'],
-                ['arg' => '--no-extensions', 'desc' => 'Do not load PHPUnit extensions'],
+                ['arg' => '--extension <class>', 'desc' => 'Register test runner extension with bootstrap <class>'],
+                ['arg' => '--no-extensions', 'desc' => 'Do not register test runner extensions'],
                 ['arg' => '--include-path <path(s)>', 'desc' => 'Prepend PHP\'s include_path with given path(s)'],
                 ['arg' => '-d <key[=value]>', 'desc' => 'Sets a php.ini value'],
                 ['arg' => '--cache-directory <dir>', 'desc' => 'Specify cache directory'],
@@ -175,6 +178,7 @@ final class Help
                 ['arg' => '--exclude-group <name>', 'desc' => 'Exclude tests from the specified group(s)'],
                 ['arg' => '--covers <name>', 'desc' => 'Only run tests that intend to cover <name>'],
                 ['arg' => '--uses <name>', 'desc' => 'Only run tests that intend to use <name>'],
+                ['arg' => '--requires-php-extension <name>', 'desc' => 'Only run tests that require PHP extension <name>'],
                 ['arg' => '--list-test-files', 'desc' => 'List available test files'],
                 ['arg' => '--list-tests', 'desc' => 'List available tests'],
                 ['arg' => '--list-tests-xml <file>', 'desc' => 'List available tests in XML format'],
@@ -208,9 +212,11 @@ final class Help
                 ['arg'    => '--stop-on-incomplete', 'desc' => 'Stop after first incomplete test'],
                 ['spacer' => ''],
 
+                ['arg'    => '--fail-on-empty-test-suite', 'desc' => 'Signal failure using shell exit code when no tests were run'],
                 ['arg'    => '--fail-on-warning', 'desc' => 'Signal failure using shell exit code when a warning was triggered'],
                 ['arg'    => '--fail-on-risky', 'desc' => 'Signal failure using shell exit code when a test was considered risky'],
                 ['arg'    => '--fail-on-deprecation', 'desc' => 'Signal failure using shell exit code when a deprecation was triggered'],
+                ['arg'    => '--fail-on-phpunit-deprecation', 'desc' => 'Signal failure using shell exit code when a PHPUnit deprecation was triggered'],
                 ['arg'    => '--fail-on-notice', 'desc' => 'Signal failure using shell exit code when a notice was triggered'],
                 ['arg'    => '--fail-on-skipped', 'desc' => 'Signal failure using shell exit code when a test was skipped'],
                 ['arg'    => '--fail-on-incomplete', 'desc' => 'Signal failure using shell exit code when a test was marked incomplete'],
@@ -239,6 +245,7 @@ final class Help
                 ['arg'    => '--display-incomplete', 'desc' => 'Display details for incomplete tests'],
                 ['arg'    => '--display-skipped', 'desc' => 'Display details for skipped tests'],
                 ['arg'    => '--display-deprecations', 'desc' => 'Display details for deprecations triggered by tests'],
+                ['arg'    => '--display-phpunit-deprecations', 'desc' => 'Display details for PHPUnit deprecations'],
                 ['arg'    => '--display-errors', 'desc' => 'Display details for errors triggered by tests'],
                 ['arg'    => '--display-notices', 'desc' => 'Display details for notices triggered by tests'],
                 ['arg'    => '--display-warnings', 'desc' => 'Display details for warnings triggered by tests'],
@@ -247,6 +254,7 @@ final class Help
 
                 ['arg'    => '--teamcity', 'desc' => 'Replace default progress and result output with TeamCity format'],
                 ['arg'    => '--testdox', 'desc' => 'Replace default result output with TestDox format'],
+                ['arg'    => '--testdox-summary', 'desc' => 'Repeat TestDox output for tests with errors, failures, or issues'],
                 ['spacer' => ''],
 
                 ['arg' => '--debug', 'desc' => 'Replace default progress and result output with debugging information'],
@@ -269,6 +277,8 @@ final class Help
                 ['arg' => '--coverage-html <dir>', 'desc' => 'Write code coverage report in HTML format to directory'],
                 ['arg' => '--coverage-php <file>', 'desc' => 'Write serialized code coverage data to file'],
                 ['arg' => '--coverage-text=<file>', 'desc' => 'Write code coverage report in text format to file [default: standard output]'],
+                ['arg' => '--only-summary-for-coverage-text', 'desc' => 'Option for code coverage report in text format: only show summary'],
+                ['arg' => '--show-uncovered-for-coverage-text', 'desc' => 'Option for code coverage report in text format: show uncovered files'],
                 ['arg' => '--coverage-xml <dir>', 'desc' => 'Write code coverage report in XML format to directory'],
                 ['arg' => '--warm-coverage-cache', 'desc' => 'Warm static analysis cache'],
                 ['arg' => '--coverage-filter <dir>', 'desc' => 'Include <dir> in code coverage reporting'],

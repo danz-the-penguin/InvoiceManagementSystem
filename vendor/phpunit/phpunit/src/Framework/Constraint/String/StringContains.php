@@ -17,16 +17,16 @@ use function sprintf;
 use function str_contains;
 use function strlen;
 use function strtr;
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Util\Exporter;
 
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
-final readonly class StringContains extends Constraint
+final class StringContains extends Constraint
 {
-    private string $needle;
-    private bool $ignoreCase;
-    private bool $ignoreLineEndings;
+    private readonly string $needle;
+    private readonly bool $ignoreCase;
+    private readonly bool $ignoreLineEndings;
 
     public function __construct(string $needle, bool $ignoreCase = false, bool $ignoreLineEndings = false)
     {
@@ -60,7 +60,7 @@ final readonly class StringContains extends Constraint
 
     public function failureDescription(mixed $other): string
     {
-        $stringifiedHaystack = (new Exporter)->export($other);
+        $stringifiedHaystack = Exporter::export($other);
         $haystackEncoding    = $this->getDetectedEncoding($other);
         $haystackLength      = $this->getHaystackLength($other);
 
