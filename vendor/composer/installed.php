@@ -3,7 +3,7 @@
         'name' => 'invoicemanagementsystem/app',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '79bfb42cf3410b607c8a8173159a559ed013ee41',
+        'reference' => 'b7e25e900958c74975103db89a1029d54beac08e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'invoicemanagementsystem/app' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '79bfb42cf3410b607c8a8173159a559ed013ee41',
+            'reference' => 'b7e25e900958c74975103db89a1029d54beac08e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
