@@ -213,7 +213,7 @@ $mysqli->close();
 			<table class="table table-bordered" id="invoice_table">
 				<thead>
 					<tr>
-						<th width="500">
+						<th>
 							<h4><a href="#" class="btn btn-success btn-xs add-row"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a> Item</h4>
 						</th>
 						<th>
@@ -222,7 +222,7 @@ $mysqli->close();
 						<th>
 							<h4>Price</h4>
 						</th>
-						<th width="300">
+						<th>
 							<h4>Discount</h4>
 						</th>
 						<th>
@@ -246,13 +246,9 @@ $mysqli->close();
 
 						$result2 = mysqli_query($mysqli, $query2);
 
-						//var_dump($result2);
-
 						// mysqli select query
 						if($result2) {
 							while ($rows = mysqli_fetch_assoc($result2)) {
-
-								//var_dump($rows);
 
 							    $item_product = $rows['product'];
 							    $item_qty = $rows['qty'];

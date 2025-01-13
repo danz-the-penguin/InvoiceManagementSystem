@@ -6,8 +6,8 @@
 * Developer: Abhishek Raj
 *******************************************************************************/
 
-include'header.php';
-include'functions.php';
+include_once'header.php';
+include_once'functions.php';
 include_once"includes/config.php";
 
 function getTotalSalesAmount($mysqli) {

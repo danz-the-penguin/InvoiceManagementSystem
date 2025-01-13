@@ -36,7 +36,6 @@ include('functions.php');
 			    	    	<label>
 			    	    		<input name="remember" type="checkbox" value="Remember Me"> Remember Me
 			    	    	</label>
-			    	    	<!--a href="forgot.php" class="float-right">Forgot password?</a-->
 			    	    </div>
 			    		<button type="button" id="btn-login" class="btn btn-danger btn-block">Login</button><br>
 			    	</fieldset>

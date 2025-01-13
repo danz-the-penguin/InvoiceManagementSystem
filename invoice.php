@@ -33,7 +33,7 @@ class invoicr extends FPDF_rotation
 	*                               Public methods                                 *
 	*                                                                              *
 	*******************************************************************************/
-	function invoicr($size='A4',$currency='€',$language='en')
+	public function __construct($size='A4',$currency='€',$language='en')
 	{
 		$this->columns = 5;
 		$this->items = array();
@@ -84,7 +84,6 @@ class invoicr extends FPDF_rotation
 	function setFrom($data)
 	{
 		$this->from = array_filter($data);
-        //print_r(array_filter($data));
 	}
 	
 	function setTo($data)
@@ -112,7 +111,7 @@ class invoicr extends FPDF_rotation
 		$this->flipflop = true;
 	}
 	
-	function addItem($item,$description,$quantity,$vat,$price,$discount=0,$total)
+	public function addItem($item,$description,$quantity,$vat,$price,$total,$discount=0)
 	{
 		$p['item'] 			= $item;
 		$p['description'] 	= $this->br2nl($description);
@@ -518,10 +517,6 @@ class invoicr extends FPDF_rotation
 	{
 		switch ($dsize)
 		{
-			case 'A4':
-				$document['w'] = 210;
-				$document['h'] = 297;
-				break;
 			case 'letter':
 				$document['w'] = 215.9;
 				$document['h'] = 279.4;
@@ -530,6 +525,7 @@ class invoicr extends FPDF_rotation
 				$document['w'] = 215.9;
 				$document['h'] = 355.6;
 				break;
+			case 'A4':
 			default:
 				$document['w'] = 210;
 				$document['h'] = 297;
